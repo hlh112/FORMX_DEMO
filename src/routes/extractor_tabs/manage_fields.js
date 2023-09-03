@@ -696,8 +696,7 @@ export default function ManageFields() {
                                 <div>null</div>
                             </FieldContainer>
                     })}
-                {currentCustomContent.length > 0? <ModelHead>Custom Model Fields (Instant) <div className='train-model-button'>Train Model<MyIcon IconName='Forward'/></div></ModelHead> : ''}
-                <FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer>
+                {currentCustomContent.length > 0? <><ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Train Model<MyIcon IconName='Forward'/></div></ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
                 {extractedCustomData.map((dataSets, index) => {
                             return <FieldContainer key={index}>
                                 <div>
