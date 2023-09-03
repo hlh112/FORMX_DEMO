@@ -174,7 +174,7 @@ export default function CreateExtractor() {
     const createCustomExtractor = (e) => {
         const type = e.currentTarget.getAttribute('type')
         sessionStorage.setItem("selectedExtractorType", JSON.stringify(type));
-        navigate('/onboarding-test')
+        navigate('/onboarding-custom')
     }
 
     //page composition
