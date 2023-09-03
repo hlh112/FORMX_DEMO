@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import ManageFields from './extractor_tabs/manage_fields';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { Icon } from '@fluentui/react/lib/Icon';
+import { getFieldsSchema } from '../data/field_schema';
 
 const InfoBar = styled.div`
     background: #2a2a2a;
@@ -39,11 +39,13 @@ const PageWrapper = styled.div`
     gap: 20px;
     background: #FAF9F8;
     overflow-y: scroll;
+    align-content: start;
 `
 const SolutionCard = styled.div`
     border: 1px solid #e1e1e1;
     padding: 16px;
     min-height: 250px;
+    height: fit-content;
     width: calc(50% - 44px);
     position: relative;
 
@@ -142,7 +144,15 @@ export default function Onboarding() {
     const navigate = useNavigate();
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
 
-    const [ModelSelected, setModelSelected] = useState(false)
+    const selectExtractor = (e) => {
+        const type = e.currentTarget.getAttribute('type')
+        sessionStorage.setItem("selectedExtractorType", JSON.stringify(type));
+        type==='Custom'? navigate('/onboarding-custom') : navigate('/onboarding-test')
+    }
+
+    useEffect(() => {
+        sessionStorage.setItem("allExtractorContent", JSON.stringify(getFieldsSchema()));
+    })
 
     //page composition
     return <>
@@ -161,9 +171,9 @@ export default function Onboarding() {
                 <Border />
                 <p>select a solution</p>
                 <div className='card-inner-wrapper'>
-                    <Solution>ID card<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Passport<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Address Proof<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='ID card'>ID card<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Passport'>Passport<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Address Proof'>Address Proof<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
             <SolutionCard className='mall-color'>
@@ -172,9 +182,9 @@ export default function Onboarding() {
                 <Border />
                 <p>select a solution</p>
                 <div className='card-inner-wrapper'>
-                    <Solution onClick={()=> navigate('/onboarding-test')}>Receipt<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Credit Card Slip<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Digital Payment Slip<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Receipt'>Receipt<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Credit Card Slip'>Credit Card Slip<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Digital Payment Slip'>Digital Payment Slip<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
             <SolutionCard className='finance-color'>
@@ -183,8 +193,8 @@ export default function Onboarding() {
                 <Border />
                 <p>select a solution</p>
                 <div className='card-inner-wrapper'>
-                    <Solution>Invoice<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Bank Statement<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Invoice'>Invoice<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Bank Statement'>Bank Statement<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
             <SolutionCard className='logistics-color'>
@@ -193,9 +203,9 @@ export default function Onboarding() {
                 <Border />
                 <p>select a solution</p>
                 <div className='card-inner-wrapper'>
-                    <Solution>Bill of Lading<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Airway Bill<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Shipment Label<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Bill of Lading'>Bill of Lading<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Airway Bill'>Airway Bill<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='SHipment Label'>Shipment Label<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
             <SolutionCard className='other-color'>
@@ -204,15 +214,15 @@ export default function Onboarding() {
                 <Border />
                 <p>select a solution</p>
                 <div className='card-inner-wrapper'>
-                    <Solution>Business Registration<MyIcon IconName='Forward'/></Solution>
-                    <Solution>Food License<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Business Registration'>Business Registration<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Food License'>Food License<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
             <SolutionCard className='custom-color'>
                 <MyIcon IconName='Repair'/>
                 <h3>Build A Custom Solution</h3>
                 <div className='card-inner-wrapper'>
-                    <Solution onClick={()=> navigate('/onboarding-custom')}>Start Building a Custom Model<MyIcon IconName='Forward'/></Solution>
+                    <Solution onClick={(e) => selectExtractor(e)} type='Custom'>Start Building a Custom Model<MyIcon IconName='Forward'/></Solution>
                 </div>
             </SolutionCard>
         </PageWrapper>

@@ -272,7 +272,6 @@ const TestImageWrapper = styled.div`
 `
 const CustomEmpty = styled.div`
     padding: 14px 20px;
-    margin-top: 20px;
     border-top: 1px solid #e1e1e1;
     h4 {
         font-size: 12px;

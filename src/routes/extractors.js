@@ -54,7 +54,7 @@ const ExtractorCard = styled.div`
     ${props => props.extractorType === 'Repair'? 'background: radial-gradient(farthest-corner at 390px 200px, #B3F0E8 0%, #fdfdfd 60%)' : ''};
     ${props => props.extractorType === 'Bank'? 'background: radial-gradient(farthest-corner at 390px 200px, #F0D7B3 0%, #fdfdfd 60%)' : ''};
     ${props => props.extractorType === 'Product'? 'background: radial-gradient(farthest-corner at 390px 200px, #C6B3F0 0%, #fdfdfd 60%)' : ''};
-    ${props => props.extractorType === 'Lightblub'? 'background: radial-gradient(farthest-corner at 390px 200px, #B3C0F0 0%, #fdfdfd 60%)' : ''};
+    ${props => props.extractorType === 'Lightbulb'? 'background: radial-gradient(farthest-corner at 390px 200px, #B3C0F0 0%, #fdfdfd 60%)' : ''};
     ${props => props.extractorType === 'ContactCard'? 'background: radial-gradient(farthest-corner at 390px 200px, #F0EDB3 0%, #fdfdfd 60%)' : ''};
     box-shadow: 2px 5px 20px #0000000f;
     padding: 20px;
@@ -155,15 +155,27 @@ const contactUs = () => {
 }
 
 export default function Extractors() {
-
-    useEffect(() => {
-        sessionStorage.setItem("allExtractorContent", JSON.stringify(getFieldsSchema()));
-        sessionStorage.setItem("allSampleData", JSON.stringify(getSampleData()));
-    })
-
+    //basic utilities
     const navigate = useNavigate();
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
 
+    useEffect(() => {
+        //sessionStorage.setItem("allExtractorContent", JSON.stringify(getFieldsSchema()));
+        sessionStorage.setItem("allSampleData", JSON.stringify(getSampleData()));
+    })
+
+    //const extractor = getFieldsSchema()
+    const extractor = JSON.parse(sessionStorage.getItem("allExtractorContent"));
+
+    //Selecting an extractor
+    const selectExtractor = (e) => {
+        // Trigger navigation to a specific route
+        const path = e.target.getAttribute('href')
+        navigate(path);
+        sessionStorage.setItem("selectedExtractorID", JSON.stringify(e.target.getAttribute('extractorID')));  
+    };
+
+    //Teaching Bubble Handlings
     const [tutoiralCompleted, setTutoiralCompleted ] = useState(() => {
         const storage = JSON.parse(sessionStorage.getItem("extractorsTutorialCompleted"));
         if (storage) { 
@@ -172,8 +184,6 @@ export default function Extractors() {
             return false 
         }
     });
-
-    const extractor = getFieldsSchema()
 
     useEffect(() => {
         const bubble = document.querySelector('.stepOne')
@@ -190,13 +200,6 @@ export default function Extractors() {
         sessionStorage.setItem("extractorsTutorialCompleted", JSON.stringify(true));
     }
 
-    const selectExtractor = (e) => {
-        // Trigger navigation to a specific route
-        const path = e.target.getAttribute('href')
-        navigate(path);
-        sessionStorage.setItem("selectedExtractorID", JSON.stringify(e.target.getAttribute('extractorID')));  
-    };
-
     //page composition
     return <>
         <Navbar />
@@ -210,7 +213,7 @@ export default function Extractors() {
                 <h1>Extractors</h1>
             </PageHead>
             <ExtractorsWrapper>
-                <ExtractorCard className='create-extractor-button'>
+                <ExtractorCard className='create-extractor-button' onClick={() => navigate('../create-extractor')}>
                     <MyIcon IconName='AddTo'/>
                     <h3>Create New Extractor</h3>
                 </ExtractorCard>

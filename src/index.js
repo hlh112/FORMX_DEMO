@@ -14,6 +14,7 @@ import Onboarding from './routes/onboarding';
 import Login from './routes/login';
 import OnboardingTest from './routes/onboarding-test';
 import OnboardingCustom from './routes/onboarding-custom';
+import CreateExtractor from './routes/create-extractor';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -28,6 +29,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/onboarding" element={<Onboarding />} />
         <Route path="/onboarding-test" element={<OnboardingTest />} />
+        <Route path="/create-extractor" element={<CreateExtractor />} />
         <Route path="/onboarding-custom" element={<OnboardingCustom />} />
         <Route path="/extractors" element={<Extractors />} />
         <Route path="/workspaces" element={<Workspaces />} />

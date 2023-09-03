@@ -8,6 +8,7 @@ import { YellowButton, BorderButton } from '../ui-components/button';
 import callToaster from "../helper/CallToaster";
 import callLoading from '../helper/CallLoading';
 import TeachingBubble from '../ui-components/teachingBubble';
+import { getPreTrainedSchema } from '../data/pre_trained_schema';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -250,26 +251,20 @@ const Dialog = styled.div`
 `
 
 export default function OnboardingTest() {
+
+    //basic utilities
     const navigate = useNavigate();
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
-
-    const schema = getFieldsSchema()
+    //get all pre-built extractor schema
+    const allSchema = getPreTrainedSchema()
+    //get selected extractor type
+    const extractorType = JSON.parse(sessionStorage.getItem("selectedExtractorType"));
+    //find the matching schema
+    const schema = allSchema.filter(schema => schema.extractorType === extractorType)
     const PreTrainedContent = schema[0].PreTrainedFields
 
+    const [currentPreTrainedContent, setPreTrainedContent] = useState(PreTrainedContent)
     const [extractStatus, setExtractStatus] = useState(false)
-
-    const [currentPreTrainedContent, setPreTrainedContent] = useState(() => {
-        const storage = JSON.parse(sessionStorage.getItem("newPreTrainedContent"));
-        if (storage) {
-            return storage
-        } else {
-            return PreTrainedContent
-        }
-    });
-
-    const resetTest = () => {
-        setExtractStatus(false)
-    }
 
     //test extractor related handelings
     const [extractedPreTrainedData, setExtractedPreTrainedData] = useState([])
@@ -284,15 +279,12 @@ export default function OnboardingTest() {
             return {field_name: fieldName, default_field_name: fieldDefaultName, field_status: fieldStatus}
         })
         setPreTrainedContent(newPreTrainedFieldArray)
-        sessionStorage.setItem("newPreTrainedContent", JSON.stringify(newPreTrainedFieldArray));
+        //sessionStorage.setItem("newPreTrainedContent", JSON.stringify(newPreTrainedFieldArray));
     }
 
     const testExtractor = (e) => {
 
-        //callLoading('Extracting Document...')
-
         const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
-
         const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
               field.field_status === true
         );
@@ -309,17 +301,59 @@ export default function OnboardingTest() {
         setNullPreTrainedData(nonMatchingPreTrainedFields)
         setExtractStatus(true)
 
-
         setTimeout(showDialog, 1200)
     }
 
+    const resetTest = () => {
+        setExtractStatus(false)
+    }
+
+    //Create Extractor
+    const createExtractor = () => {
+        //generate new extractor id
+        const existingCount = JSON.parse(sessionStorage.getItem("extractorIdCount"))? JSON.parse(sessionStorage.getItem("extractorIdCount")) : 0;
+        const newCount = existingCount + 1
+        sessionStorage.setItem("extractorIdCount", JSON.stringify(newCount));
+        const newID = '00' + newCount
+        //generate extractor type icon
+        let icon;
+
+        if (extractorType === 'Receipt' || extractorType === 'Credit Card Slip' || extractorType === 'Digital Payment Slip') {
+            icon = 'ShoppingCart';
+          } else if (extractorType === 'ID card' || extractorType === 'Passport' || extractorType === 'Address Proof') {
+            icon = 'ContactCard';
+          } else if (extractorType === 'Invoice' || extractorType === 'Bank Statement') {
+            icon = 'Bank';
+          } else if (extractorType === 'Bill of Lading' || extractorType === 'Airway Bill' || extractorType === 'Shipment Label' ) {
+            icon = 'Product';
+          } else if (extractorType === 'Business Registration' || extractorType === 'Food License') {
+            icon = 'Lightbulb';
+          } else if (extractorType === 'Custom') {
+            icon = 'Repair';
+          }
+
+        //generate extractor details
+        const extractorDetails = {
+            extractorID: newID,
+            extractorName: extractorType,
+            extractorIcon: icon,
+            extractorType: extractorType == 'Custom'? 'Custom Extractor' : 'Pre-Trained Extractor',
+            lastEditDate: '5 Aug 2023',
+            PreTrainedFields: currentPreTrainedContent,
+            CustomFields: []
+        }
+
+        const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
+        const newArray = [...oldArray, extractorDetails]
+        sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+
+        callLoading('Finish Setting Up Your Account...', navigate, '../extractors')
+    }
+
+    //Teaching Bubble Handlings
     const showDialog = () => {
         const dialog = document.querySelectorAll('.tutorial-dialog')
         dialog[0].classList.add('show')
-    }
-
-    const contactUs = () => {
-        callToaster('green', 'We will come back to you shortly! Stay tuned:)')
     }
 
     useEffect(() => {
@@ -340,6 +374,11 @@ export default function OnboardingTest() {
         bubble.classList.remove('show')
         nextBubble.classList.add('show')
       }
+
+    //Contact Us handling
+    const contactUs = () => {
+        callToaster('green', 'We will come back to you shortly! Stay tuned:)')
+    }
 
     //page composition
     return <PageWrapper>
@@ -420,9 +459,9 @@ export default function OnboardingTest() {
         <Dialog className='tutorial-dialog'>
             <h4>So What’s Next?</h4>
             <p>Now you have a glimpse of how FormX works, and there are so much more you can do!</p>
-            <div onClick={() => callLoading('Finish Setting Up Your Account...', navigate, '../extractors')}><YellowButton text='I want to keep testing the extractor' /></div>
-            <div onClick={() => callLoading('Finish Setting Up Your Account...', navigate, '../extractors')}><YellowButton text='I want to add additional data fields for extraction' /></div>
+            <div onClick={createExtractor}><YellowButton text='I want to keep testing the extractor' /></div>
+            <div onClick={createExtractor}><YellowButton text='I want to add additional data fields for extraction' /></div>
             <div onClick={contactUs}><BorderButton text='Contact FormX Team' /></div>
         </Dialog> 
-        </PageWrapper>   
+        </PageWrapper>
 }

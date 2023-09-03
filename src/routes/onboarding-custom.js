@@ -2,10 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { Icon } from '@fluentui/react/lib/Icon';
-import { YellowButton, BorderButton } from '../ui-components/button';
+import { YellowButton } from '../ui-components/button';
 import { getFieldsSchema } from "../data/field_schema";
-import LoadingState from '../ui-components/loading';
 import callLoading from '../helper/CallLoading';
+import { getPreTrainedSchema } from '../data/pre_trained_schema';
 
 const PageWrapper = styled.div`
     padding: 32px;
@@ -119,37 +119,28 @@ const Chip = styled.div`
 `
 
 export default function OnboardingCustom() {
+    //Basic utilities
     const navigate = useNavigate();
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
 
-    const schema = getFieldsSchema()
+    //get all pre-built extractor schema
+    const allSchema = getPreTrainedSchema()
+    //get selected extractor type
+    const extractorType = JSON.parse(sessionStorage.getItem("selectedExtractorType"));
+    //find the matching schema
+    const schema = allSchema.filter(schema => schema.extractorType === extractorType)
     const CustomContent = schema[0].CustomFields
+    const [currentCustomContent, setCustomContent] = useState(CustomContent)
 
-    const [currentCustomContent, setCustomContent] = useState(() => {
-        const storage = JSON.parse(sessionStorage.getItem("newCustomContent"));
-        if (storage) {
-            return storage
-        } else {
-            return CustomContent
-        }
-    });
-
+    //Capture Doc Type
     const [DocType, SetDocType] = useState('')
-
     const generateFields = () => {
         const docTypeValue = document.querySelector('#docType').value
         SetDocType(docTypeValue)
         document.querySelector('#docType').value = ''
     }
-
-    const goBack = () => {
-        SetDocType('')
-    }
-
-    const removeChip = (e) => {
-        console.log('removed')
-    }
-
+    
+    //Add or Remove Fields
     const addNewField = (e) => {
         const inputValue = document.querySelector('#fieldName').value
         const newFieldObj = {
@@ -161,6 +152,40 @@ export default function OnboardingCustom() {
         setCustomContent(newCustomContent)
 
         sessionStorage.setItem("newCustomContent", JSON.stringify(newCustomContent));
+    }
+
+    const removeChip = (e) => {
+        console.log('removed')
+    }
+    //Create Extractor
+    const createExtractor = () => {
+        const existingCount = JSON.parse(sessionStorage.getItem("extractorIdCount"))? JSON.parse(sessionStorage.getItem("extractorIdCount")) : 0;
+        const newCount = existingCount + 1
+        sessionStorage.setItem("extractorIdCount", JSON.stringify(newCount));
+        const newID = '00' + newCount
+
+        //generate extractor details
+        const extractorDetails = {
+            extractorID: newID,
+            extractorName: DocType,
+            extractorIcon: 'Repair',
+            extractorType: 'Custom Extractor',
+            lastEditDate: '5 Aug 2023',
+            PreTrainedFields: [],
+            CustomFields : currentCustomContent
+        }
+
+        const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
+
+        const newArray = [...oldArray, extractorDetails]
+        sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+
+        callLoading('Finish Setting Up Your Account...', navigate, '../extractors')
+    }
+
+    //Go Back
+    const goBack = () => {
+        SetDocType('')
     }
 
     //page composition
@@ -179,7 +204,7 @@ export default function OnboardingCustom() {
                         return <Chip>{content.field_name}<div style={{height:'12px'}} onClick={(e) => removeChip(e)}><MyIcon IconName='Cancel'/></div></Chip>
                     })}
                 </ChipsWrapper>
-                <div style={{textAlign:'right'}} onClick={() => callLoading('Finish Setting Up Your Account...', navigate, '../extractors')}><YellowButton text='Proceed with these fields' /></div>
+                <div style={{textAlign:'right'}} onClick={createExtractor}><YellowButton text='Proceed with these fields' /></div>
             </TestWrapper>
             : <TestWrapper>
                 <h3>What type of <strong>Document</strong> are you extracting?</h3>
