@@ -34,10 +34,9 @@ const SchemaWrapper = styled.div`
 `
 const FieldsWrapper = styled.div`
     height: 100%;
-    
 `
 const FieldInnerWrapper = styled.div`
-    height: calc(50% - 82px);
+    height: ${props => props.height > 0? 'calc(50% - 82px)' : 'calc(100% - 100px)'};
     overflow-y: scroll;
 `
 const EditFieldWrapper = styled.div`
@@ -559,7 +558,7 @@ export default function ManageFields() {
                                 <p className='desc'>Fields that are readily available for extraction without further AI model training needed.</p>
                             </div>
                         </ModelHead>
-                        <FieldInnerWrapper>
+                        <FieldInnerWrapper height={currentPreTrainedContent.length}>
                         {currentPreTrainedContent.map((dataSets, index) => {
                             return <FieldContainer key={index} className={'field-container pre-trained-field-container'} onClick={(e) => selectField(dataSets.field_name, dataSets.field_type, dataSets.default_field_name, e)}>
                                 <div style={{display: 'flex', gap:'10px', alignItems:'center'}}>
@@ -581,7 +580,7 @@ export default function ManageFields() {
                             <h4>Don’t see the fields you need? </h4>
                             <p onClick={addNewField}>Create your own fields using the FormX custom model.</p>
                             </CustomEmpty>}
-                        <FieldInnerWrapper>
+                        <FieldInnerWrapper height={currentPreTrainedContent.length}>
                         {currentCustomContent.map((dataSets, index) => {
                             return <FieldContainer key={index} className={'field-container custom-field-container'} onClick={(e) => selectField(dataSets.field_name, dataSets.field_type, dataSets.custom_field_name, e)}>
                                     <div className={'field-container-field-name'}>{dataSets.field_name}</div>
