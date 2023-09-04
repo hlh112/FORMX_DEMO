@@ -163,7 +163,7 @@ export default function Guide() {
 
     </GuideWrapper>
     : ''}
-    <TriggerWrapper onClick={() => setToggled(true)}>
+    <TriggerWrapper className='guide-trigger' onClick={() => setToggled(true)}>
         <IconWrapper><MyIcon IconName='BookAnswers'/></IconWrapper><p>Setup Guide</p>
     </TriggerWrapper>   
     </>
