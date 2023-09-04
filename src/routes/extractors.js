@@ -31,6 +31,7 @@ const PageWrapper = styled.div`
 const InnerPageWrapper = styled.div`
     padding: 12px 40px 45px 40px;
     overflow-y: scroll;
+    height: 100%;
 `
 
 const PageHead = styled.div`
