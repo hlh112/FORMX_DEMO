@@ -4,6 +4,8 @@ import { Icon } from '@fluentui/react/lib/Icon';
 import { Navbar } from '../ui-components/navbar';
 import { useState } from 'react';
 import { getPreTrainedSchema } from '../data/pre_trained_schema';
+import callToaster from '../helper/CallToaster';
+import callLoading from '../helper/CallLoading';
 
 const PageWrapper = styled.div`
     padding: 32px;
@@ -167,8 +169,8 @@ export default function CreateExtractor() {
         const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
         const newArray = [...oldArray, extractorDetails]
         sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
-
-        navigate('../extractors')
+        sessionStorage.setItem("selectedExtractorID", JSON.stringify(newID));
+        callLoading('Creating Extractor', navigate, '../extractors/extractor')
     }
 
     const createCustomExtractor = (e) => {

@@ -186,6 +186,7 @@ export default function OnboardingCustom() {
     //Go Back
     const goBack = () => {
         SetDocType('')
+        navigate(-1)
     }
 
     //page composition

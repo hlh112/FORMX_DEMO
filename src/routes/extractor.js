@@ -73,6 +73,11 @@ export default function Extractor() {
     const [currentTab, setCurrentTab] = useState('manage-fields')
     const navigate = useNavigate();
 
+    const allSchema = JSON.parse(sessionStorage.getItem("allExtractorContent"));
+    const thisExtractorID = JSON.parse(sessionStorage.getItem("selectedExtractorID"));
+    const schema = allSchema.filter(item => item.extractorID === thisExtractorID)
+    const extractorName = schema[0].extractorName
+
     const selectTab = (e) => {
         const activeElements = document.querySelectorAll('.extractor-tab');
         activeElements.forEach(element => {
@@ -98,7 +103,7 @@ export default function Extractor() {
             <Breadcrumb>
                 <BreadcrumbItem className='link' href='../extractors' onClick={handleClick}>Extractors</BreadcrumbItem>
                 <BreadcrumbItem className='chevron'><MyIcon IconName='ChevronRight'/></BreadcrumbItem>
-                <BreadcrumbItem className='selected'>Receipt</BreadcrumbItem>
+                <BreadcrumbItem className='selected'>{extractorName}</BreadcrumbItem>
             </Breadcrumb>
             <TabBar>
                 <TabItem className='extractor-tab selected tab-manage-fields' data-label='manage-fields' onClick={selectTab}>Manage Fields</TabItem>

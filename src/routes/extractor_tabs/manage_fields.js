@@ -299,6 +299,18 @@ export default function ManageFields() {
     const PreTrainedContent = schema[0].PreTrainedFields
     const CustomContent = schema[0].CustomFields
 
+    const [firstTimeTesting, setFirstTimeTesting] = useState(false)
+
+    const triggerGuide = () => {
+        document.querySelector('.guide-trigger').click()
+    }
+
+    useEffect(() => {
+        if (firstTimeTesting === true) {
+            setTimeout(triggerGuide, 1500)
+        }
+    }, [firstTimeTesting])
+
     const [currentPreTrainedContent, setPreTrainedContent] = useState(() => {
         const storage = JSON.parse(sessionStorage.getItem(thisExtractorID + "_newPreTrainedContent"));
         if (storage) {
@@ -358,6 +370,7 @@ export default function ManageFields() {
         setNullCustomData(nonMatchingCustomFields)
         setExtractStatus(true)
         setEditMode(false)
+        setFirstTimeTesting(true)
     }
 
     const resetTest = () => {
