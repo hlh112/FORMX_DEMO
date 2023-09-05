@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import { Icon } from '@fluentui/react/lib/Icon';
 import { getFieldsSchema } from '../data/field_schema';
+import { getSampleData } from '../data/fsl_sample';
 
 const InfoBar = styled.div`
     background: #2a2a2a;
@@ -152,6 +153,7 @@ export default function Onboarding() {
 
     useEffect(() => {
         sessionStorage.setItem("allExtractorContent", JSON.stringify(getFieldsSchema()));
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(getSampleData()));
     })
 
     //page composition

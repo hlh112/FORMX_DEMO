@@ -168,8 +168,20 @@ export default function CreateExtractor() {
 
         const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
         const newArray = [...oldArray, extractorDetails]
+
+        const extractorSamplePool = {
+            extractorID: newID,
+            samples: []
+          }
+  
+        const oldSampleArray = JSON.parse(sessionStorage.getItem('allFSLSampleContent'));
+        const newSampleArray = [...oldSampleArray, extractorSamplePool]
+
         sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(newSampleArray));
+
         sessionStorage.setItem("selectedExtractorID", JSON.stringify(newID));
+
         callLoading('Creating Extractor', navigate, '../extractors/extractor')
     }
 

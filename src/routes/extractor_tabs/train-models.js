@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-import { YellowButton, BorderButtonWithIconLeft, BorderButton } from '../../ui-components/button';
 import { Icon } from '@fluentui/react/lib/Icon';
 import callToaster from "../../helper/CallToaster";
 import callLoading from "../../helper/CallLoading";
 import TeachingBubble from '../../ui-components/teachingBubble';
+import { YellowButton, BorderButtonWithIconLeft, BorderButton } from '../../ui-components/button';
+import FilePicker from '../../ui-components/file-picker';
 
 const PageWrapper = styled.div`
     display: flex;
@@ -13,7 +14,6 @@ const PageWrapper = styled.div`
 `
 const LeftWrapper = styled.div`
     width: 100%;
-    border-right: 1px solid #e1e1e1;
 `
 const TabHeader = styled.div`
   padding: 12px 20px;
@@ -35,13 +35,12 @@ const TabHeader = styled.div`
   }
 `
 const SchemaWrapper = styled.div`
-    border-right: solid 1px #e1e1e1;
+    border-left: solid 1px #e1e1e1;
     width: 30%;
     height: 100%;
 `
 const FieldsWrapper = styled.div`
     height: 100%;
-    
 `
 const FieldInnerWrapper = styled.div`
     height: calc(50% - 82px);
@@ -152,6 +151,20 @@ const FieldContainer = styled.div`
 
   .field-container-field-status {
     accent-color: #25D0B1;
+  }
+
+  .field-result {
+    border: 1px solid #e1e1e1;
+    font-size: 12px;
+    padding: 4px 8px;
+    transition: 500ms ease 0s;
+    border-radius: 2px;
+    width: 180px;
+  }
+  &:hover {
+    .field-result {
+        border: 1px solid #999;
+    }
   }
 `
 const Toolbar = styled.div`
@@ -318,8 +331,54 @@ const TableCell = styled.td`
         }
       }
 `
+const EmptyWrapper = styled.div`
+  background: #F6FDFC;
+  width: 100%;
+  height: calc(100% - 155px);
+  padding: 20px;
+  box-sizing: border-box;
+`
+const EmptyInnerWrapper = styled.div`
+  width: 100%;
+  border: dashed 2px #25D0B1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+const EditorWrapper = styled.div`
+      display: flex;
+      width: 100%;
+      height: calc(100vh - 91px);
+`
+const EditSchemaWrapper = styled.div`
+    border-left: solid 1px #e1e1e1;
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+`
+const TestImageWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #FAF9F8;
+`
+const ResultsWrapper = styled.div`
+    overflow-y: scroll;
+`
+const ButtonWrapper = styled.div`
+      border-top: 1px solid #e1e1e1;
+      padding: 12px 12px 24px 12px;
+      display: flex;
+      gap: 6px;
+      justify-content: end;
+`
 
-export default function TrainModels() {
+export default function TrainModels(props) {
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
 
     const thisExtractorID = JSON.parse(sessionStorage.getItem("selectedExtractorID"));
@@ -327,10 +386,6 @@ export default function TrainModels() {
     const allSchema = JSON.parse(sessionStorage.getItem("allExtractorContent"));
     const schema = allSchema.filter(item => item.extractorID === thisExtractorID)
     const CustomContent = schema[0].CustomFields
-
-    //console.log(getSampleData())
-    const allSampleData = JSON.parse(sessionStorage.getItem("allSampleData"));
-    const sampleData = allSampleData.filter(item => item.extractorID === thisExtractorID)[0].samples    
 
     const [currentCustomContent, setCustomContent] = useState(() => {
         const storage = JSON.parse(sessionStorage.getItem(thisExtractorID + "_newCustomContent"));
@@ -340,8 +395,125 @@ export default function TrainModels() {
             return CustomContent
         }
     });
+
+    const [editMode, setEditMode] = useState(false)
+    const [selectedImage, setSelectedImage] = useState('')
+
+    const openEditor = (fileName) => {
+        setEditMode(true)
+        setSelectedImage(fileName)
+        document.querySelector('.guide-trigger').classList.add('hide')
+    }
+
+    const handleCheckboxClick = (e) => {
+        e.stopPropagation();
+    }
+
+    const deleteSample = (e, deleteSampleFileName) => {
+
+        const allExtractorSample = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
+        const extractorIndex = allExtractorSample.findIndex(obj => obj.extractorID === thisExtractorID)
+
+        allExtractorSample[extractorIndex].samples = allExtractorSample[extractorIndex].samples.filter(sample => sample.fileName !== deleteSampleFileName)
+        
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractorSample));
+        props.setSampleData(allExtractorSample[extractorIndex].samples)
+
+        handleCheckboxClick(e)
+    }
+
+    const deleteAllSample = (e) => {
+
+        const allExtractorSample = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
+        const extractorIndex = allExtractorSample.findIndex(obj => obj.extractorID === thisExtractorID)
+
+        allExtractorSample[extractorIndex].samples = []
+        
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractorSample));
+        props.setSampleData(allExtractorSample[extractorIndex].samples)
+
+        handleCheckboxClick(e)
+    }
+
+    const saveSample = () => {
+        setEditMode(false)
+        document.querySelector('.guide-trigger').classList.remove('hide')
+        callToaster('green', 'Sample Data Mark as Reviewed')
+
+        const selectedData = props.sampleData.filter(data => data.fileName === selectedImage)
+        const index = props.sampleData.findIndex(obj => obj.fileName === selectedImage)
+
+        const dataName = document.querySelectorAll('.ground-truth-name')
+        const dataResult = document.querySelectorAll('.ground-truth-data')
+
+        const groundTruthArray = [];
+
+        for (let i = 0; i < dataName.length; i++) {
+          const key = dataName[i].textContent;
+          const value = dataResult[i].value;
+          const pair = {field_name: key, extracted_data: value};
+
+          groundTruthArray.push(pair);
+        }
+
+        const sampleObj = {
+            fileName: selectedData[0].fileName,
+            filePath: selectedData[0].filePath,
+            reviewStatus: 'Reviewed',
+            dateUploaded: selectedData[0].dateUploaded,
+            includeStatus: true,
+            groundTruth : groundTruthArray
+        }
+
+        props.sampleData[index] = sampleObj
+
+        const allExtractor = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
+        const extractorIndex = allExtractor.findIndex(obj => obj.extractorID === thisExtractorID)
+
+        allExtractor[extractorIndex].samples = props.sampleData
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractor));
+    }
+
+    const reprocessSample = () => {
+        callLoading('Extracting Document...', callToaster, 'green', 'Extraction Completed')
+    }
+
+    const reprocessAllSample = () => {
+
+        const allExtractorSample = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
+        const extractorIndex = allExtractorSample.findIndex(obj => obj.extractorID === thisExtractorID)
+        allExtractorSample[extractorIndex].samples.forEach(sample => {
+
+            sample.reviewStatus = 'Pending Review';
+
+        })
+
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractorSample));
+        props.setSampleData(allExtractorSample[extractorIndex].samples)
+
+        console.log(allExtractorSample[extractorIndex].samples, 'hi')
+        callLoading('Extracting All Documents...', callToaster, 'green', 'Extraction Completed')
+    }
+
+    const uploadFile = () => {
+        document.querySelector('.file-picker').classList.add('show')
+    }
+
+    ////////////////
+    
+    const currentFieldName = currentCustomContent.map(obj => obj.field_name);
+    const sampleData = props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth? props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth : [{1:'1'}]
+
+    const sampleDataFieldName = sampleData.map(obj => obj.field_name)
+
+    const MatchingFields = sampleData.filter(obj1 =>
+        currentFieldName.some(obj2 => obj2 === obj1.field_name)
+    );
+
+    const notMatchingFields = currentFieldName.filter(fields => !sampleDataFieldName?.includes(fields));
+    
     //page composition
-    return <PageWrapper>
+    return <>{editMode===false? <PageWrapper>
         <LeftWrapper>
         <TabHeader>
             <div>
@@ -349,13 +521,14 @@ export default function TrainModels() {
                 <p>To fine-tune the extraction performance, you can provide FormX with some sample data to train the extraction model.</p>
             </div>
         </TabHeader>
-        <Toolbar>
+        {props.sampleData.length? <>
+            <Toolbar>
             <div>
-                <ToolBtn onClick={''}><MyIcon IconName='Add'/>Add New Sample</ToolBtn>
-                <ToolBtn onClick={''}><MyIcon IconName='TestBeaker'/>Extract All Files Again</ToolBtn>
+                <ToolBtn onClick={uploadFile}><MyIcon IconName='Add'/>Add New Sample</ToolBtn>
+                <ToolBtn onClick={reprocessAllSample}><MyIcon IconName='TestBeaker' />Extract All Files Again</ToolBtn>
             </div>
             <div>
-                <ToolBtn onClick={''} style={{marginRight:'0'}}><MyIcon IconName='Delete'/>Delete All</ToolBtn>
+                <ToolBtn style={{marginRight:'0'}} onClick={deleteAllSample}><MyIcon IconName='Delete'/>Delete All</ToolBtn>
             </div>
         </Toolbar>
         <TableWrapper>
@@ -369,25 +542,32 @@ export default function TrainModels() {
                 <TableHead className='m'>Including in Training Set</TableHead>
                 <TableHead className='xs'>Action</TableHead>
             </TableRow>
-            {sampleData.map((sample,index) => {
+            {props.sampleData.map((sample,index) => {
 
-                return <TableRow className='table-content'>
-                        <TableCell className='xs'><input className='checkbox' type='checkbox' /></TableCell>
-                        <TableCell className='s'><img src={`/../img/sample data/${thisExtractorID + '/' + sample.fileName}`} alt='' /></TableCell>
+                return <TableRow key={index} className='table-content' onClick={() => openEditor(sample.fileName)}>
+                        <TableCell className='xs'><input className='checkbox' type='checkbox' onClick={(e) => handleCheckboxClick(e)} /></TableCell>
+                        <TableCell className='s'><img src={sample.filePath} alt='' /></TableCell>
                         <TableCell className='m'>{sample.fileName}</TableCell>
                         <TableCell className='s' status={sample.reviewStatus}><div className='badge'>{sample.reviewStatus}</div></TableCell>
                         <TableCell className='m'>{sample.dateUploaded}</TableCell>
                         <TableCell className='xs'>
-                            <label className="switch">
-                                <input type="checkbox" defaultChecked={sample.includeStatus} />
+                            <label className="switch" onClick={(e) => handleCheckboxClick(e)}>
+                                <input type="checkbox" className='switch-checkbox' defaultChecked={sample.includeStatus} />
                                 <span className="slider round"></span>
                             </label>
                         </TableCell>
-                        <TableCell className='xs delete-button'><MyIcon IconName='Delete' /></TableCell>
+                        <TableCell className='xs delete-button' onClick={(e) => deleteSample(e, sample.fileName)}><MyIcon IconName='Delete' /></TableCell>
                     </TableRow>
             })}
         </SampleTable>
         </TableWrapper>
+        </>: <EmptyWrapper>
+                <EmptyInnerWrapper>
+                    <img src='../img/fsl-empty.png' alt='' />
+                    <div style={{marginTop:'30px'}} onClick={uploadFile}><YellowButton text='Upload Documents' /></div>
+                </EmptyInnerWrapper>
+            </EmptyWrapper>
+        }
         </LeftWrapper>
         <SchemaWrapper>
                 <FieldsWrapper>
@@ -403,5 +583,42 @@ export default function TrainModels() {
                 })}
                 </FieldsWrapper>
             </SchemaWrapper>
-    </PageWrapper>   
+    </PageWrapper> : 
+    <EditorWrapper>
+        <TestImageWrapper>
+            <img src='/../img/test image/receipt.png' alt='' />
+        </TestImageWrapper>
+        <EditSchemaWrapper>
+            <div>
+            <ModelHead>Custom Model Fields (Instant)</ModelHead>
+            <FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer>
+            <ResultsWrapper>
+                {MatchingFields.map((dataSets, index) => {
+                    return <FieldContainer key={index} className='editable-ground-truth'>
+                            <div>
+                                <div className="green-badge"></div>
+                                <div className='ground-truth-name'>{dataSets.field_name}</div>
+                            </div>
+                            <input type='text' className='field-result ground-truth-data' defaultValue={dataSets.extracted_data} />
+                        </FieldContainer>
+                })}
+                {notMatchingFields.map((data,index) => {
+                    return<FieldContainer key={index} className='editable-ground-truth'>
+                            <div>
+                                <div className="green-badge"></div>
+                                <div className='ground-truth-name'>{data}</div>
+                            </div>
+                            <input type='text' className='field-result ground-truth-data' defaultValue='null' />
+                        </FieldContainer>
+                })}
+            </ResultsWrapper>
+            </div>
+            <ButtonWrapper>
+                <div onClick={reprocessSample}><BorderButton text='Reprocess Extraction'/></div>
+                <div onClick={saveSample}><YellowButton text='Mark as Reviewed'/></div>
+            </ButtonWrapper>
+        </EditSchemaWrapper>
+    </EditorWrapper>
+    }
+    </>
 }

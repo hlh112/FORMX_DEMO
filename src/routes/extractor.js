@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { Icon } from '@fluentui/react/lib/Icon';
 import {Navbar, NavbarCollapsed} from '../ui-components/navbar';
 import Guide from '../ui-components/guide';
+import FilePicker from '../ui-components/file-picker';
+import { getSampleSource } from '../data/fsl_sample_source';
 
 const ExtractorHeader = styled.div`
     border-bottom: 1px solid #e1e1e1;
@@ -94,9 +96,14 @@ export default function Extractor() {
         navigate(path);
       };
 
+    const FSLSampleData = getSampleSource()
+
+    const allSampleData = JSON.parse(sessionStorage.getItem("allFSLSampleContent"));
+    const rawSampleData = allSampleData.filter(item => item.extractorID === thisExtractorID)[0].samples 
+    const [sampleData, setSampleData] = useState(rawSampleData)
     //page composition
     return <>
-        
+        <FilePicker images={FSLSampleData} extractorID={thisExtractorID} setSampleData={setSampleData} />
         <NavbarCollapsed />
         <PageWrapper>
         <ExtractorHeader>
@@ -125,7 +132,7 @@ export default function Extractor() {
                             )
                         } else if (currentTab === 'train-models') {
                             return (
-                                <TrainModels />
+                                <TrainModels sampleData={sampleData} setSampleData={setSampleData}/>
                             )
                         }
                 })()  

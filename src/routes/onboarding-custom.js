@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
 import styled from "styled-components";
 import { Icon } from '@fluentui/react/lib/Icon';
 import { YellowButton } from '../ui-components/button';
@@ -176,9 +176,18 @@ export default function OnboardingCustom() {
         }
 
         const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
-
         const newArray = [...oldArray, extractorDetails]
+
+        const extractorSamplePool = {
+            extractorID: newID,
+            samples: []
+          }
+  
+        const oldSampleArray = JSON.parse(sessionStorage.getItem('allFSLSampleContent'));
+        const newSampleArray = [...oldSampleArray, extractorSamplePool]
+
         sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(newSampleArray));
 
         callLoading('Finish Setting Up Your Account...', navigate, '../extractors')
     }

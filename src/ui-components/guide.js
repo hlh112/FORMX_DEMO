@@ -27,6 +27,10 @@ const TriggerWrapper = styled.div`
         box-shadow: none;
         background: #f5f5f5;
     }
+
+    &.hide {
+        display: none;
+    }
 `
 const IconWrapper = styled.div`
     background: #25D0B1;
@@ -127,7 +131,7 @@ const ButtonWrapper = styled.div`
     }
 `
 
-export default function Guide() {
+export default function Guide(props) {
 
     const [Toggled, setToggled] = useState(false)
 

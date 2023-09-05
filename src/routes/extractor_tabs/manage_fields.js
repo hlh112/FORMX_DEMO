@@ -442,6 +442,12 @@ export default function ManageFields() {
         const elem = document.querySelectorAll('.custom-field-container')
         elem[elem.length-1]?.click()
         elem[elem.length-1]?.scrollIntoView()
+
+        if (currentCustomContent.length === 0) {
+            document.querySelector('.tab-train-models').style.display = 'none'
+        } else {
+            document.querySelector('.tab-train-models').style.display = 'block'
+        }
     }, [currentCustomContent])
 
     //delete fields handling

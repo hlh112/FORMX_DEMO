@@ -345,7 +345,18 @@ export default function OnboardingTest() {
 
         const oldArray = JSON.parse(sessionStorage.getItem("allExtractorContent"));
         const newArray = [...oldArray, extractorDetails]
+
+        const extractorSamplePool = {
+          extractorID: newID,
+          samples: []
+        }
+
+        const oldSampleArray = JSON.parse(sessionStorage.getItem('allFSLSampleContent'));
+        console.log(oldSampleArray)
+        const newSampleArray = [...oldSampleArray, extractorSamplePool]
+        console.log(newSampleArray)
         sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(newSampleArray));
 
         callLoading('Finish Setting Up Your Account...', navigate, '../extractors')
     }
