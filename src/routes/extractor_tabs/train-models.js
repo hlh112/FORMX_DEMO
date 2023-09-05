@@ -398,10 +398,13 @@ export default function TrainModels(props) {
 
     const [editMode, setEditMode] = useState(false)
     const [selectedImage, setSelectedImage] = useState('')
+    const [selectedImagePath, setSelectedImagePath] = useState('')
 
-    const openEditor = (fileName) => {
+    const openEditor = (fileName, filePath) => {
         setEditMode(true)
         setSelectedImage(fileName)
+        setSelectedImagePath(filePath)
+        console.log(filePath)
         document.querySelector('.guide-trigger').classList.add('hide')
     }
 
@@ -491,7 +494,6 @@ export default function TrainModels(props) {
         sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractorSample));
         props.setSampleData(allExtractorSample[extractorIndex].samples)
 
-        console.log(allExtractorSample[extractorIndex].samples, 'hi')
         callLoading('Extracting All Documents...', callToaster, 'green', 'Extraction Completed')
     }
 
@@ -502,7 +504,7 @@ export default function TrainModels(props) {
     ////////////////
     
     const currentFieldName = currentCustomContent.map(obj => obj.field_name);
-    const sampleData = props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth? props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth : [{1:'1'}]
+    const sampleData = props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth? props.sampleData.filter(sample => sample.fileName === selectedImage)[0]?.groundTruth : []
 
     const sampleDataFieldName = sampleData.map(obj => obj.field_name)
 
@@ -544,7 +546,7 @@ export default function TrainModels(props) {
             </TableRow>
             {props.sampleData.map((sample,index) => {
 
-                return <TableRow key={index} className='table-content' onClick={() => openEditor(sample.fileName)}>
+                return <TableRow key={index} className='table-content' onClick={() => openEditor(sample.fileName, sample.filePath)}>
                         <TableCell className='xs'><input className='checkbox' type='checkbox' onClick={(e) => handleCheckboxClick(e)} /></TableCell>
                         <TableCell className='s'><img src={sample.filePath} alt='' /></TableCell>
                         <TableCell className='m'>{sample.fileName}</TableCell>
@@ -586,7 +588,7 @@ export default function TrainModels(props) {
     </PageWrapper> : 
     <EditorWrapper>
         <TestImageWrapper>
-            <img src='/../img/test image/receipt.png' alt='' />
+            <img src={selectedImagePath} alt='' />
         </TestImageWrapper>
         <EditSchemaWrapper>
             <div>
