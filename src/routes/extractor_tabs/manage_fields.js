@@ -378,6 +378,10 @@ export default function ManageFields() {
         setExtractStatus(false)
     }
 
+    const reTest = () => {
+        callLoading('Extracting Document...', callToaster, 'green', 'Extraction Completed')
+    }
+
     //edit mode handelings
     const [editMode, setEditMode] = useState(false)
 
@@ -742,7 +746,7 @@ export default function ManageFields() {
                             </div>
                             <div>
                                 <ToolBtn onClick={resetTest}><MyIcon IconName='TestBeaker'/>Test Another file</ToolBtn>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='Refresh'/>Re-Test This File</ToolBtn>
+                                <ToolBtn onClick={reTest}><MyIcon IconName='Refresh'/>Re-Test This File</ToolBtn>
                                 <ToolBtn onClick={resetTest} style={{marginRight:'0'}}><MyIcon IconName='Cancel'/>Clear</ToolBtn>
                             </div>
                         </Toolbar>
