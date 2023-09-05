@@ -177,6 +177,18 @@ export default function Extractors() {
         sessionStorage.setItem("selectedExtractorID", JSON.stringify(e.target.getAttribute('extractorID')));  
     };
 
+    const deleteExtractor = (e) => {
+        const thisExtractorID =  e.currentTarget.parentNode.getAttribute('extractorID')
+
+        const allExtractor = JSON.parse(sessionStorage.getItem("allExtractorContent"));
+        const newArray = allExtractor.filter(extractor => extractor.extractorID !== thisExtractorID)
+        sessionStorage.setItem("allExtractorContent", JSON.stringify(newArray));
+
+        const allFSLSamplePool = JSON.parse(sessionStorage.getItem("allFSLSampleContent"));
+        const newSampleArray = allFSLSamplePool.filter(extractor => extractor.extractorID !== thisExtractorID)
+        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(newSampleArray));
+    }
+
     //Teaching Bubble Handlings
     const [tutoiralCompleted, setTutoiralCompleted ] = useState(() => {
         const storage = JSON.parse(sessionStorage.getItem("extractorsTutorialCompleted"));
@@ -225,7 +237,7 @@ export default function Extractors() {
                         <h3>{each.extractorName}</h3>
                         <div className='card-details'><p className='key'>Extractor Type</p><p>{each.extractorType}</p></div>
                         <div className='card-details'><p className='key'>Last edited</p><p>{each.lastEditDate}</p></div>
-                        <DeleteButton><MyIcon IconName='Delete'/></DeleteButton>
+                        <DeleteButton onClick={(e) => deleteExtractor(e)}><MyIcon IconName='Delete'/></DeleteButton>
                         <TeachingBubble title='This is the extactor you just created' content='This extractor contains the solution you just selected. You can adjust and fine tune the extraction performance inside.' count='' arrow='top' xPosition='left: 0px' yPosition='bottom: -200px' primaryAction='Got it' secondaryAction='' className='stepOne bubble' onClick={dismissBubble} />
                 </ExtractorCard>
                 })}
