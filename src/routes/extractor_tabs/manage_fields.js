@@ -423,7 +423,8 @@ export default function ManageFields() {
     //change field name
     const changeFieldName = (e) => {
         const newFieldName = document.querySelector('.field-container.active .field-container-field-name')
-        newFieldName.innerHTML = e.currentTarget.value
+        const formattedValue = e.currentTarget.value.trim().replace(/\s+/g, '_').toLowerCase();
+        newFieldName.innerHTML = formattedValue
     }
     //change field type
     const changeFieldType = (e) => {

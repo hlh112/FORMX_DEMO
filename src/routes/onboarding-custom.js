@@ -143,8 +143,11 @@ export default function OnboardingCustom() {
     //Add or Remove Fields
     const addNewField = (e) => {
         const inputValue = document.querySelector('#fieldName').value
+
+        const formattedValue = inputValue.trim().replace(/\s+/g, '_').toLowerCase();
+
         const newFieldObj = {
-            field_name: inputValue,
+            field_name: formattedValue,
             field_type: 'single-line text'
         }
 
