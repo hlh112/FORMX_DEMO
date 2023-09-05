@@ -9,6 +9,7 @@ import Guide from '../ui-components/guide';
 import FilePicker from '../ui-components/file-picker';
 import { getSampleSource } from '../data/fsl_sample_source';
 import callToaster from '../helper/CallToaster';
+import { getExtractedData } from '../data/extracted_data';
 
 const ExtractorHeader = styled.div`
     border-bottom: 1px solid #e1e1e1;
@@ -80,6 +81,9 @@ export default function Extractor() {
     const thisExtractorID = JSON.parse(sessionStorage.getItem("selectedExtractorID"));
     const schema = allSchema.filter(item => item.extractorID === thisExtractorID)
     const extractorName = schema[0].extractorName
+    const currentPreTrainedContent = schema[0].PreTrainedFields
+    const currentCustomContent = schema[0].CustomFields
+    
 
     const selectTab = (e) => {
         const activeElements = document.querySelectorAll('.extractor-tab');
@@ -96,15 +100,28 @@ export default function Extractor() {
         const path = e.target.getAttribute('href')
         navigate(path);
       };
-
+    //fsl sample testing handings
     const FSLSampleData = getSampleSource()
 
     const allSampleData = JSON.parse(sessionStorage.getItem("allFSLSampleContent"));
     const rawSampleData = allSampleData.filter(item => item.extractorID === thisExtractorID)[0].samples 
     const [sampleData, setSampleData] = useState(rawSampleData)
+
+
+    //Test extractor handling
+    const extractedData = getExtractedData()
+    const [selectedImage, setSelectedImage] = useState('')
+
+    const [runTesting, setRunTesting] = useState(false)
+
+    const displayTestResults = (selectedImageData) => {
+        setRunTesting(true)
+    }
+
     //page composition
     return <>
         <FilePicker images={FSLSampleData} extractorID={thisExtractorID} setSampleData={setSampleData} />
+        <FilePicker images={extractedData} setSampleData={setSelectedImage} displayTestResults={displayTestResults} className='test-extractor'/>
         <NavbarCollapsed />
         <PageWrapper>
         <ExtractorHeader>
@@ -129,7 +146,7 @@ export default function Extractor() {
                 (() => {
                     if(currentTab === 'manage-fields') {
                             return (
-                                <ManageFields />
+                                <ManageFields runTesting={runTesting}/>
                             )
                         } else if (currentTab === 'train-models') {
                             return (

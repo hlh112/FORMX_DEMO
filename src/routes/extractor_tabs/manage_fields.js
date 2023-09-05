@@ -288,7 +288,7 @@ const CustomEmpty = styled.div`
         }
     }
 `
-export default function ManageFields() {
+export default function ManageFields(props) {
     
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
     //load schema content for this form
@@ -333,6 +333,12 @@ export default function ManageFields() {
         sessionStorage.setItem("key-here", JSON.stringify(currentPreTrainedContent));
     }, [currentPreTrainedContent])
 
+    useEffect(() => {
+        if (props.runTesting === true) {
+            runTesting()
+        }
+    }, [props.runTesting])
+
     //test extractor related handelings
     const [extractedPreTrainedData, setExtractedPreTrainedData] = useState([])
     const [extractedCustomData, setExtractedCustomData] = useState([])
@@ -341,6 +347,10 @@ export default function ManageFields() {
     const [extractStatus, setExtractStatus] = useState(false)
 
     const testExtractor = (e) => {
+        document.querySelector('.file-picker.test-extractor').classList.add('show')
+    }
+
+    const runTesting = () => {
         const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
         const extractedCustomModelData = getExtractedData()[0].CustomModelResults
 
@@ -683,7 +693,7 @@ export default function ManageFields() {
                         <img src='/../img/upload icon.svg' alt='' />
                         <h2>Quick Test With a File</h2>
                         <p>Drag or upload a file to test the extraction performance.</p>
-                        <div onClick={()=>callLoading('Extracting Document...', testExtractor)}><YellowButton text='Upload Files' /></div>
+                        <div onClick={testExtractor}><YellowButton text='Upload Files' /></div>
                         </InnerTestingWrapper>
                     </TestingWrapper>
             </EditModeInnerWrapper></EditModeWrapper> 

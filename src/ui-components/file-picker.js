@@ -79,7 +79,7 @@ export default function FilePicker(props) {
         setSelectedFileGroundTruth(JSON.parse(e.currentTarget.getAttribute('truth')))  
     }
     const closePicker = () => {
-        document.querySelector('.file-picker').classList.remove('show')
+        document.querySelector('.file-picker.show').classList.remove('show')
     }
 
     const uploadSample = (extractorId) => {
@@ -112,13 +112,13 @@ export default function FilePicker(props) {
 
             const selectedSampleData = props.images.filter(image => image.fileName === selectedFile)
             props.setSampleData(selectedSampleData)
-            document.querySelector('.file-picker').classList.remove('show')
+            document.querySelector('.file-picker.show').classList.remove('show')
             callLoading('Extracting Document...', props.displayTestResults, selectedSampleData)
         }
     }
     //page composition
     return <>
-        <Overlay className='file-picker'>
+        <Overlay className={`${props.className} file-picker`}>
             <Modal>
                 <FileWrapper>
                     {props.images.map((image, index) => {
