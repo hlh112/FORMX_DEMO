@@ -5,6 +5,8 @@ export default function callLoading(text, callback, callBackParam1, callBackPara
     content.innerHTML = text
     setTimeout(() => {
         spinner.classList.remove('show');
-        callback(callBackParam1, callBackParam2);
+        if (callback) {
+            callback(callBackParam1, callBackParam2)
+        } 
     }, 2000)
 }

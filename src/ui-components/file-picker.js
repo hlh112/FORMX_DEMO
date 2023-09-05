@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { YellowButton, BorderButton } from './button';
+import { YellowButton, BorderButton } from '../ui-components/button';
 import { useState } from "react";
+import callLoading from "../helper/CallLoading";
 
 const Overlay = styled.div`
     width: 100%;
@@ -82,29 +83,38 @@ export default function FilePicker(props) {
     }
 
     const uploadSample = (extractorId) => {
-        const today = new Date();
-        const day = today.getDate();
-        const month = today.getMonth() + 1; // Note: January is 0
-        const year = today.getFullYear();
-        const newDate = `${day}/${month}/${year}`
+        if (extractorId) {
+            const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1; // Note: January is 0
+            const year = today.getFullYear();
+            const newDate = `${day}/${month}/${year}`
+    
+            const sampleObj = {
+                fileName: selectedFile,
+                filePath: selectedFilePath,
+                reviewStatus: 'Pending Review',
+                dateUploaded: newDate,
+                includeStatus: false,
+                groundTruth : selectedFileGroundTruth
+            }
+            const allExtractor = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
+            const thisExtractor = allExtractor.filter(elem => elem.extractorID === extractorId)
+            const thisSampleArray = thisExtractor[0].samples
+            thisSampleArray.push(sampleObj)
+    
+            sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractor));
+            document.querySelector('.file-picker').classList.remove('show')
+    
+            props.setSampleData(thisExtractor[0].samples)
 
-        const sampleObj = {
-            fileName: selectedFile,
-            filePath: selectedFilePath,
-            reviewStatus: 'Pending Review',
-            dateUploaded: newDate,
-            includeStatus: false,
-            groundTruth : selectedFileGroundTruth
+        } else {
+
+            const selectedSampleData = props.images.filter(image => image.fileName === selectedFile)
+            props.setSampleData(selectedSampleData)
+            document.querySelector('.file-picker').classList.remove('show')
+            callLoading('Extracting Document...', props.displayTestResults, selectedSampleData)
         }
-        const allExtractor = JSON.parse(sessionStorage.getItem("allFSLSampleContent"))
-        const thisExtractor = allExtractor.filter(elem => elem.extractorID === extractorId)
-        const thisSampleArray = thisExtractor[0].samples
-        thisSampleArray.push(sampleObj)
-
-        sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractor));
-        document.querySelector('.file-picker').classList.remove('show')
-
-        props.setSampleData(thisExtractor[0].samples)
     }
     //page composition
     return <>

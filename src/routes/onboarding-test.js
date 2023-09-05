@@ -9,6 +9,7 @@ import callToaster from "../helper/CallToaster";
 import callLoading from '../helper/CallLoading';
 import TeachingBubble from '../ui-components/teachingBubble';
 import { getPreTrainedSchema } from '../data/pre_trained_schema';
+import FilePicker from '../ui-components/file-picker';
 
 const PageWrapper = styled.div`
   display: flex;
@@ -267,8 +268,16 @@ export default function OnboardingTest() {
     const [extractStatus, setExtractStatus] = useState(false)
 
     //test extractor related handelings
+    const extractedData = getExtractedData()
+
+    const [selectedImage, setSelectedImage] = useState('')
+    const [selectedImagPath, setSelectedImagePath] = useState('')
     const [extractedPreTrainedData, setExtractedPreTrainedData] = useState([])
     const [nullPreTrainedData, setNullPreTrainedData] = useState([])
+    //const [extractedCustomData, setExtractedCustomData] = useState([])
+    //const [nullCustomData, setNullCustomData] = useState([])
+
+
 
     const updateSchema = () => {
         const newPreTrainedFields = Array.from(document.querySelectorAll('.pre-trained-field-container'))
@@ -283,8 +292,41 @@ export default function OnboardingTest() {
     }
 
     const testExtractor = (e) => {
+      document.querySelector('.file-picker').classList.add('show')
+    }
 
-        const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
+    const displayTestResults = (selectedImageData) => {
+
+        const sampledata = selectedImageData
+        const imgPath = sampledata[0].filePath
+        console.log(sampledata[0].filePath, imgPath)
+        const PreTrainedResults = sampledata[0].PreTrainedModelResults
+        //const CustomResults = sampledata[0].CustomModelResults
+
+        const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
+              field.field_status === true
+        );
+
+        const matchingPreTrainedFields = PreTrainedResults.filter(obj1 =>
+          SelectedPreTrainedContent.some(obj2 => obj2.default_field_name === obj1.field_name)
+        );
+
+        const nonMatchingPreTrainedFields = SelectedPreTrainedContent.filter(obj1 =>
+          PreTrainedResults.every(obj2 => obj2.field_name !== obj1.default_field_name)
+        );
+
+        setExtractedPreTrainedData(matchingPreTrainedFields)
+        setNullPreTrainedData(nonMatchingPreTrainedFields)
+        //setExtractedCustomData(matchingPreTrainedFields)
+        //setNullCustomData(nonMatchingPreTrainedFields)
+        setSelectedImagePath(imgPath)
+        setExtractStatus(true)
+
+        setTimeout(showDialog, 1200)
+    }
+      //callLoading('Extracting Document...')
+
+        /*const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
         const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
               field.field_status === true
         );
@@ -301,8 +343,8 @@ export default function OnboardingTest() {
         setNullPreTrainedData(nonMatchingPreTrainedFields)
         setExtractStatus(true)
 
-        setTimeout(showDialog, 1200)
-    }
+        setTimeout(showDialog, 1200)*/
+    
 
     const resetTest = () => {
         setExtractStatus(false)
@@ -393,6 +435,7 @@ export default function OnboardingTest() {
 
     //page composition
     return <PageWrapper>
+        <FilePicker images={extractedData} setSampleData={setSelectedImage} displayTestResults={displayTestResults}/>
         <TeachingBubble title='The data to extract' content='These Data fields are readily available for extraction right out of the box using the FormX pre-built solution. Feel free to play around and select the fields that suit your needs!' count='1 of 2' arrow='left' xPosition='left: 20%' yPosition='top: 120px' primaryAction='Next' secondaryAction='' className='stepOne bubble' onClick={nextBubble} />
         <TeachingBubble title='Test the data extraction here' content='Then, followed by uploading a file and see how the FormX data extraction works! Don’t have a file on hand? No worries, you can use our dummy samples to test the data extraction for now and setup later!' count='2 of 2' arrow='right' xPosition='right: 50%' yPosition='top: 55%' primaryAction='Got it' secondaryAction='' className='stepTwo bubble' onClick={dismissBubble} />
         <EditModeWrapper>
@@ -425,7 +468,7 @@ export default function OnboardingTest() {
                         <img src='/../img/upload icon.svg' alt='' />
                         <h2>Quick Test With a File</h2>
                         <p>Drag or upload a file to test the extraction performance.</p>
-                        <div onClick={() => callLoading('Extracting Document...', testExtractor)}><YellowButton text='Upload Files' /></div>
+                        <div onClick={(e) => testExtractor(e)}><YellowButton text='Upload Files' /></div>
                         </InnerTestingWrapper>
                 </TestingWrapper>
             </> : <>
@@ -461,7 +504,7 @@ export default function OnboardingTest() {
                             </div>
                         </Toolbar>
                         <TestImageWrapper>
-                            <img src='/../img/test image/receipt.png' alt='' />
+                            <img src={selectedImagPath} alt='' />
                         </TestImageWrapper>
                 </TestingWrapper>
             </>}        
