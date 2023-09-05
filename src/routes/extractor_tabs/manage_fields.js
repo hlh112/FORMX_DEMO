@@ -33,7 +33,8 @@ const SchemaWrapper = styled.div`
     height: 100%;
 `
 const FieldsWrapper = styled.div`
-    height: 100%;
+    height: calc(100% - 61px);
+    overflow-y: scroll;
 `
 const FieldInnerWrapper = styled.div`
     height: ${props => props.height > 0? 'calc(50% - 82px)' : 'calc(100% - 100px)'};
@@ -267,7 +268,7 @@ const TestImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 40px);
 `
 const CustomEmpty = styled.div`
     padding: 14px 20px;
