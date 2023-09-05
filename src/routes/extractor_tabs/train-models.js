@@ -14,6 +14,7 @@ const PageWrapper = styled.div`
 `
 const LeftWrapper = styled.div`
     width: 100%;
+    height: 100%;
 `
 const TabHeader = styled.div`
   padding: 12px 20px;
@@ -38,6 +39,7 @@ const SchemaWrapper = styled.div`
     border-left: solid 1px #e1e1e1;
     width: 30%;
     height: 100%;
+    overflow-y: scroll;
 `
 const FieldsWrapper = styled.div`
     height: 100%;
@@ -193,8 +195,8 @@ const ToolBtn = styled.div`
     }
 `
 const TableWrapper = styled.div`
-    overflow: scroll;
-    height: 100%;
+    height: calc(100% - 100px);
+    overflow-y: scroll;
 `
 const SampleTable = styled.table`
     width: 100%;
@@ -359,6 +361,8 @@ const EditSchemaWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-y: scroll;
+    position: relative;
 `
 const TestImageWrapper = styled.div`
     display: flex;
@@ -368,7 +372,6 @@ const TestImageWrapper = styled.div`
     background: #FAF9F8;
 `
 const ResultsWrapper = styled.div`
-    overflow-y: scroll;
 `
 const ButtonWrapper = styled.div`
       border-top: 1px solid #e1e1e1;
@@ -376,6 +379,7 @@ const ButtonWrapper = styled.div`
       display: flex;
       gap: 6px;
       justify-content: end;
+      background: white;
 `
 
 export default function TrainModels(props) {
