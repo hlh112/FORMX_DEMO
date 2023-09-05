@@ -422,7 +422,7 @@ export default function OnboardingTest() {
                 </SchemaWrapper>
                 <TestingWrapper>
                         <InnerTestingWrapper>
-                        <img src='/../img/upload icon.png' alt='' />
+                        <img src='/../img/upload icon.svg' alt='' />
                         <h2>Quick Test With a File</h2>
                         <p>Drag or upload a file to test the extraction performance.</p>
                         <div onClick={() => callLoading('Extracting Document...', testExtractor)}><YellowButton text='Upload Files' /></div>
@@ -461,7 +461,7 @@ export default function OnboardingTest() {
                             </div>
                         </Toolbar>
                         <TestImageWrapper>
-                            <img src='/../img/test image/receipt.png' alt='' />
+                            <img src='/../img/test image/receipt.svg' alt='' />
                         </TestImageWrapper>
                 </TestingWrapper>
             </>}        

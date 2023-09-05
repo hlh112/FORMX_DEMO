@@ -117,16 +117,16 @@ export default function Login(props) {
             <input id='email' type='text' placeholder='Email Address'></input>
             <div onClick={()=> callLoading('Signing-up...', signUp)}><YellowButton text='Sign Up' /></div>
             </RegisterWrapper>
-            <img style={{position:'absolute', bottom:'50px'}} src='/../img/formx_logo.png' alt='' />
+            <img style={{position:'absolute', bottom:'50px'}} src='/../img/formx_logo.svg' alt='' />
         </PageWrapper>
         : ''}
         {signupStatus===true? <>
             <InfoBar>
-                <img src='/../img/onboarding-graphic.png' alt='' />
-                <div>
+                <img src='/../img/onboarding-graphic.svg' alt='' />
+                <div> 
                     <h1>Start creating a FormX account</h1>
                     <p>Simply provide us with some basic info to setup your account.</p>
-                    <img src='/../img/formx-white.png' alt='' />
+                    <img src='/../img/formx-white.svg' alt='' />
                 </div>
             </InfoBar>
             <PageWrapper>

@@ -124,7 +124,7 @@ export function Navbar() {
     return <>
         <NavbarWrapper>
             <NavbarSection>
-                <NavbarButton><img src='/../img/formx_logo.png' alt='' /></NavbarButton>
+                <NavbarButton><img src='/../img/formx_logo.svg' alt='' /></NavbarButton>
             </NavbarSection>
             <NavbarSection>
                 <NavbarButton><Link to={'../extractors'}><MyIcon IconName='Home'/>Extractors</Link></NavbarButton>
@@ -157,7 +157,7 @@ export function NavbarCollapsed() {
     return <>
         <NavbarWrapperCollapsed>
             <NavbarSection>
-                <NavbarButtonCollapsed><img src='/../img/logo-icon.png' alt='' /></NavbarButtonCollapsed>
+                <NavbarButtonCollapsed><img src='/../img/logo-icon.svg' alt='' /></NavbarButtonCollapsed>
             </NavbarSection>
             <NavbarSection>
                 <NavbarButtonCollapsed><Link to={'../extractors'}><MyIcon IconName='Home'/></Link></NavbarButtonCollapsed>

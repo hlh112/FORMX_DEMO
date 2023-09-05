@@ -224,7 +224,7 @@ export default function OnboardingCustom() {
                     <div onClick={() => callLoading('Generating Fields...', generateFields)}><YellowButton text='Generate Fields' /></div>
                 </InputWrapper>
             </TestWrapper>}
-            <img style={{position:'absolute', bottom:'50px'}} src='/../img/formx_logo.png' alt='' />
+            <img style={{position:'absolute', bottom:'50px'}} src='/../img/formx_logo.svg' alt='' />
         </PageWrapper>
     </>
 }

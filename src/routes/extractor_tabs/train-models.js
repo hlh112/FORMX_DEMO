@@ -563,7 +563,7 @@ export default function TrainModels(props) {
         </TableWrapper>
         </>: <EmptyWrapper>
                 <EmptyInnerWrapper>
-                    <img src='../img/fsl-empty.png' alt='' />
+                    <img src='../img/fsl-empty.svg' alt='' />
                     <div style={{marginTop:'30px'}} onClick={uploadFile}><YellowButton text='Upload Documents' /></div>
                 </EmptyInnerWrapper>
             </EmptyWrapper>

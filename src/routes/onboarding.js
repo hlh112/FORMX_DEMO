@@ -159,11 +159,11 @@ export default function Onboarding() {
     //page composition
     return <>
         <InfoBar>
-            <img src='/../img/onboarding-graphic.png' alt='' />
+            <img src='/../img/onboarding-graphic.svg' alt='' />
             <div>
                 <h1>What specific solution are you seeking?</h1>
                 <p>Take a look at our Pre-built solutions. Select the one that matches your use case and start extracting instantly.</p>
-                <img src='/../img/formx-white.png' alt='' />
+                <img src='/../img/formx-white.svg' alt='' />
             </div>
         </InfoBar>
         <PageWrapper>
