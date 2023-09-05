@@ -741,8 +741,8 @@ export default function ManageFields() {
                     <TestingWrapper style={{padding: 0}}>
                         <Toolbar>
                             <div>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='Code'/>View in JSON</ToolBtn>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='Download'/>Download XLSX</ToolBtn>
+                                <ToolBtn onClick={() => callToaster('red', 'Function not implemented')}><MyIcon IconName='Code'/>View in JSON</ToolBtn>
+                                <ToolBtn onClick={() => callToaster('red', 'Function not implemented')}><MyIcon IconName='Download'/>Download XLSX</ToolBtn>
                             </div>
                             <div>
                                 <ToolBtn onClick={resetTest}><MyIcon IconName='TestBeaker'/>Test Another file</ToolBtn>

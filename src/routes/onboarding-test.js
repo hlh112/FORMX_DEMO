@@ -453,15 +453,15 @@ export default function OnboardingTest() {
                 <TestingWrapper style={{padding: 0}}>
                         <Toolbar>
                             <div>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='Code'/>View in JSON</ToolBtn>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='Download'/>Download XLSX</ToolBtn>
+                                <ToolBtn onClick={() => callToaster('red', 'Function not implemented')}><MyIcon IconName='Code'/>View in JSON</ToolBtn>
+                                <ToolBtn onClick={() => callToaster('red', 'Function not implemented')}><MyIcon IconName='Download'/>Download XLSX</ToolBtn>
                             </div>
                             <div>
                                 <ToolBtn onClick={resetTest} style={{marginRight:'0'}}><MyIcon IconName='TestBeaker'/>Test Another file</ToolBtn>
                             </div>
                         </Toolbar>
                         <TestImageWrapper>
-                            <img src='/../img/test image/receipt.svg' alt='' />
+                            <img src='/../img/test image/receipt.png' alt='' />
                         </TestImageWrapper>
                 </TestingWrapper>
             </>}        
