@@ -337,6 +337,7 @@ export default function ManageFields(props) {
     useEffect(() => {
         if (props.runTesting === true) {
             runTesting()
+            props.resetTest()
         }
     }, [props.runTesting])
 

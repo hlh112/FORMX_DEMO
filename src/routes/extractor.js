@@ -118,6 +118,10 @@ export default function Extractor() {
         setRunTesting(true)
     }
 
+    const resetDisplayTestResults = (selectedImageData) => {
+        setRunTesting(false)
+    }
+
     //page composition
     return <>
         <FilePicker images={FSLSampleData} extractorID={thisExtractorID} setSampleData={setSampleData} />
@@ -146,7 +150,7 @@ export default function Extractor() {
                 (() => {
                     if(currentTab === 'manage-fields') {
                             return (
-                                <ManageFields runTesting={runTesting}/>
+                                <ManageFields runTesting={runTesting} resetTest={resetDisplayTestResults}/>
                             )
                         } else if (currentTab === 'train-models') {
                             return (
