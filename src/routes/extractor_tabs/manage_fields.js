@@ -752,7 +752,7 @@ export default function ManageFields() {
                             </div>
                         </Toolbar>
                         <TestImageWrapper>
-                            <img src='/../img/test image/receipt.png' alt='' />
+                            <img src='/../img/test image/test1.png' alt='' />
                         </TestImageWrapper>
                     </TestingWrapper>
                 </EditModeInnerWrapper>
