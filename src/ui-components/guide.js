@@ -155,13 +155,13 @@ export default function Guide(props) {
             <h4>Basic Setups</h4>
             <div onClick={() => changeTab('.tab-manage-fields')}><p>Setup a <strong>Data Field Schema</strong></p><MyIcon IconName='ChevronRight'/></div>
             <div onClick={() => changeTab('.tab-train-models')}><p>Train the <strong>AI Extraction Model</strong></p><MyIcon IconName='ChevronRight'/></div>
-            <div><p>Formatting Extracted Data</p><MyIcon IconName='ChevronRight'/></div>
+            <div onClick={() => callToaster('red', 'Page not implemented')}><p>Formatting Extracted Data</p><MyIcon IconName='ChevronRight'/></div>
         </Section>
         <Section>
             <h4>Extraction Input and Output</h4>
-            <div><p>Extract with <strong>API Integration</strong></p><MyIcon IconName='ChevronRight'/></div>
-            <div><p>Batch Uploading with CSV Export</p><MyIcon IconName='ChevronRight'/></div>
-            <div><p>Setup Automated Workflows</p><MyIcon IconName='ChevronRight'/></div>
+            <div onClick={() => callToaster('red', 'Page not implemented')}><p>Extract with <strong>API Integration</strong></p><MyIcon IconName='ChevronRight'/></div>
+            <div onClick={() => callToaster('red', 'Page not implemented')}><p>Batch Uploading with CSV Export</p><MyIcon IconName='ChevronRight'/></div>
+            <div onClick={() => callToaster('red', 'Page not implemented')}><p>Setup Automated Workflows</p><MyIcon IconName='ChevronRight'/></div>
         </Section>
         <ButtonWrapper onClick={() => callToaster('green', 'We will get in touch with you soon!')}><BorderButtonWithIconLeft text='Contact FormX Team' iconName='Headset' /></ButtonWrapper>
 

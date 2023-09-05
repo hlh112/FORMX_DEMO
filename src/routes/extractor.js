@@ -8,6 +8,7 @@ import {Navbar, NavbarCollapsed} from '../ui-components/navbar';
 import Guide from '../ui-components/guide';
 import FilePicker from '../ui-components/file-picker';
 import { getSampleSource } from '../data/fsl_sample_source';
+import callToaster from '../helper/CallToaster';
 
 const ExtractorHeader = styled.div`
     border-bottom: 1px solid #e1e1e1;
@@ -115,11 +116,11 @@ export default function Extractor() {
             <TabBar>
                 <TabItem className='extractor-tab selected tab-manage-fields' data-label='manage-fields' onClick={selectTab}>Manage Fields</TabItem>
                 <TabItem className='extractor-tab tab-train-models' data-label='train-models' onClick={selectTab}>Train Models</TabItem>
-                <TabItem className='extractor-tab' data-label=''>Formatter</TabItem>
-                <TabItem className='extractor-tab' data-label=''>Workflow</TabItem>
-                <TabItem className='extractor-tab' data-label=''>API</TabItem>
-                <TabItem className='extractor-tab' data-label=''>Extraction Panel</TabItem>
-                <TabItem className='extractor-tab' data-label=''>Settings</TabItem>
+                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Formatter</TabItem>
+                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Workflow</TabItem>
+                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>API</TabItem>
+                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Extraction Panel</TabItem>
+                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Settings</TabItem>
             </TabBar>
         </ExtractorHeader>
 
