@@ -339,6 +339,11 @@ const EmptyWrapper = styled.div`
   height: calc(100% - 155px);
   padding: 20px;
   box-sizing: border-box;
+  transition: 500ms ease 0s;
+
+  &:hover {
+    padding: 30px;
+  }
 `
 const EmptyInnerWrapper = styled.div`
   width: 100%;
