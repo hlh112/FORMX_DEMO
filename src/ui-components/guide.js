@@ -139,7 +139,8 @@ export default function Guide(props) {
         const tab = document.querySelectorAll(identifier)
         tab[0]?.click()
         if (identifier === '.tab-manage-fields') {
-            window.location.reload()
+
+            document.querySelector('.edit-button')?.click()
             sessionStorage.setItem("EditFieldTutorialCompleted", JSON.stringify(false));
             sessionStorage.setItem("ManageFieldTutorialCompleted", JSON.stringify(false));
         }

@@ -672,7 +672,7 @@ export default function ManageFields(props) {
                         <h4>Field Schema</h4>
                         <p>Adjust the data fields you want to extract</p>
                     </div>
-                    <div onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
+                    <div className='edit-button' onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
                 </TabHeader>
                 <FieldsWrapper>
                 {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <ModelHead>Pre-trained Model Fields (Receipt)</ModelHead> : ''}
@@ -716,7 +716,7 @@ export default function ManageFields(props) {
                         <h4>Field Schema</h4>
                         <p>Adjust the data fields you want to extract</p>
                     </div>
-                    <div onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
+                    <div className='edit-button' onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
                 </TabHeader>
                 <FieldsWrapper>
                 {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <><ModelHead>Pre-trained Model Fields (Receipt)</ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
