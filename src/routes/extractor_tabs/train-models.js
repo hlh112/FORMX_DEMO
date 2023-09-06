@@ -357,6 +357,7 @@ const EditorWrapper = styled.div`
 const EditSchemaWrapper = styled.div`
     border-left: solid 1px #e1e1e1;
     width: 30%;
+    min0width: 390px; 
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -368,7 +369,7 @@ const TestImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 70%;
     background: #FAF9F8;
 `
 const ResultsWrapper = styled.div`
@@ -380,6 +381,11 @@ const ButtonWrapper = styled.div`
       gap: 6px;
       justify-content: end;
       background: white;
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      width: calc(30% - 43px);
+      overflow-x: scroll;
 `
 
 export default function TrainModels(props) {
