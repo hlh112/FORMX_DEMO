@@ -387,11 +387,13 @@ export default function ManageFields(props) {
         setExtractStatus(true)
         setEditMode(false)
         setFirstTimeTesting(true)
+        //sessionStorage.setItem("ExtractStatus", JSON.stringify(true));
     }
 
     const resetTest = () => {
         setEditMode(false)
         setExtractStatus(false)
+        //sessionStorage.setItem("ExtractStatus", JSON.stringify(false));
     }
 
     const reTest = () => {
@@ -403,7 +405,8 @@ export default function ManageFields(props) {
 
     const enterEditMode = () => {
         setEditMode(true)
-        setExtractStatus(false)
+        //setExtractStatus(false)
+        //sessionStorage.setItem("ExtractStatus", JSON.stringify(extractStatus));
     }
 
     //select first field when entering edit mode
