@@ -35,9 +35,13 @@ const SchemaWrapper = styled.div`
 const FieldsWrapper = styled.div`
     height: calc(100% - 61px);
     overflow-y: scroll;
+
+    &.editing {
+        height: 100%;
+    }
 `
 const FieldInnerWrapper = styled.div`
-    height: ${props => props.height > 0? 'calc(50% - 82px)' : 'calc(100% - 100px)'};
+    height: ${props => props.height > 0? 'calc(50% - 40px)' : 'calc(100% - 100px)'};
     overflow-y: scroll;
 `
 const EditFieldWrapper = styled.div`
@@ -587,7 +591,7 @@ export default function ManageFields(props) {
                     <TeachingBubble title='Adjust the details of each field' content='Select the field you want to adjust, then edit the field settings here.' count='2 of 3' arrow='top' xPosition='left: 33%' yPosition='top: 440px' primaryAction='Next' secondaryAction='' className='stepTwo bubble edit-field-bubble' onClick={lastBubble} />
                     <TeachingBubble title='Remember saving your changes' content='Save the changes before you leave this page.' count='3 of 3' arrow='topRight' xPosition='right: 18px' yPosition='top: 160px' primaryAction='Got it' secondaryAction='' className='stepThree bubble edit-field-bubble' onClick={dismissBubble} />
                     <SchemaWrapper>
-                        <FieldsWrapper>
+                        <FieldsWrapper className='editing'>
                         {currentPreTrainedContent.length?<><ModelHead>
                             <div>
                                 <p>Pre-trained Model Fields (Receipt)</p>
