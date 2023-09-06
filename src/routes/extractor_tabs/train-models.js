@@ -378,6 +378,7 @@ const TestImageWrapper = styled.div`
     background: #FAF9F8;
 `
 const ResultsWrapper = styled.div`
+padding-bottom: 50px;
 `
 const ButtonWrapper = styled.div`
       border-top: 1px solid #e1e1e1;
