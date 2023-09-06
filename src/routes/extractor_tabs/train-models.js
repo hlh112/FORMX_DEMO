@@ -415,8 +415,15 @@ export default function TrainModels(props) {
         setSelectedImage(fileName)
         setSelectedImagePath(filePath)
         console.log(filePath)
-        document.querySelector('.guide-trigger').classList.add('hide')
     }
+
+    useEffect(() => {
+        if (editMode === true) {
+            document.querySelector('.guide-trigger').classList.add('hide')  
+        } else if (editMode === false) {
+            document.querySelector('.guide-trigger').classList.remove('hide')  
+        }
+    }, [editMode])
 
     const handleCheckboxClick = (e) => {
         e.stopPropagation();
@@ -450,7 +457,6 @@ export default function TrainModels(props) {
 
     const saveSample = () => {
         setEditMode(false)
-        document.querySelector('.guide-trigger').classList.remove('hide')
         callToaster('green', 'Sample Data Mark as Reviewed')
 
         const selectedData = props.sampleData.filter(data => data.fileName === selectedImage)

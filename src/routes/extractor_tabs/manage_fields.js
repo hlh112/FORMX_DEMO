@@ -410,6 +410,7 @@ export default function ManageFields(props) {
     useEffect(() => {
         const activeElements = document.querySelectorAll('.field-container');
         if (activeElements.length > 0) { activeElements[0].click() }
+        document.querySelector('.guide-trigger').classList.remove('hide')
     }, [editMode])
     //select a field
     const selectField = (fieldName, fieldType, fieldCustomName, e) => {
