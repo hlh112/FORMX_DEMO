@@ -63,6 +63,11 @@ const TabItem = styled.div`
     font-size: 14px;
     opacity: .5;
     cursor: pointer;
+    transition: 500ms ease 0s;
+
+    &:hover {
+        opacity: .2;
+    }
 
     &.selected {
         border-bottom: solid 3px #25D0B1;

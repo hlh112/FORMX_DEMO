@@ -77,6 +77,7 @@ const ExtractorCard = styled.div`
 
        &:hover {
         background: white;
+        border: 1px solid #444;
        }
 
        h3 {

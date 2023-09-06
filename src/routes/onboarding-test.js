@@ -15,7 +15,6 @@ const PageWrapper = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
-  height: calc(100vh - 91px);
   position: relative;
   height: 100%;
 `
@@ -60,6 +59,11 @@ const TestingWrapper = styled.div`
   padding: 20px;
   box-sizing: border-box;
   position: relative;
+  transition: 500ms ease 0s;
+
+  &:hover {
+    padding: 30px;
+  }
 `
 const InnerTestingWrapper = styled.div`
   width: 100%;
@@ -324,28 +328,7 @@ export default function OnboardingTest() {
 
         setTimeout(showDialog, 1200)
     }
-      //callLoading('Extracting Document...')
-
-        /*const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
-        const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
-              field.field_status === true
-        );
-
-        const matchingPreTrainedFields = extractedPreTrainModelData.filter(obj1 =>
-            SelectedPreTrainedContent.some(obj2 => obj2.default_field_name === obj1.field_name)
-        );
-
-        const nonMatchingPreTrainedFields = SelectedPreTrainedContent.filter(obj1 =>
-            extractedPreTrainModelData.every(obj2 => obj2.field_name !== obj1.default_field_name)
-        );
-
-        setExtractedPreTrainedData(matchingPreTrainedFields)
-        setNullPreTrainedData(nonMatchingPreTrainedFields)
-        setExtractStatus(true)
-
-        setTimeout(showDialog, 1200)*/
-    
-
+ 
     const resetTest = () => {
         setExtractStatus(false)
     }

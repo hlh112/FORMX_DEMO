@@ -53,6 +53,11 @@ const TestingWrapper = styled.div`
   width: 70%;
   padding: 20px;
   box-sizing: border-box;
+  transition: 500ms ease 0s;
+
+  &:hover {
+    padding: 30px;
+  }
 `
 const InnerTestingWrapper = styled.div`
   width: 100%;
