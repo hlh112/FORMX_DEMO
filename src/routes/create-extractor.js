@@ -155,13 +155,19 @@ export default function CreateExtractor() {
             icon = 'Lightbulb';
           }
 
+          const today = new Date();
+          const day = today.getDate();
+          const month = today.getMonth() + 1; // Note: January is 0
+          const year = today.getFullYear();
+          const newDate = `${day}/${month}/${year}`
+
         //generate extractor details
         const extractorDetails = {
             extractorID: newID,
             extractorName: extractorType,
             extractorIcon: icon,
             extractorType: 'Pre-Trained Extractor',
-            lastEditDate: '5 Aug 2023',
+            lastEditDate: newDate,
             PreTrainedFields: PreTrainedContent,
             CustomFields: []
         }

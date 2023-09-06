@@ -167,13 +167,19 @@ export default function OnboardingCustom() {
         sessionStorage.setItem("extractorIdCount", JSON.stringify(newCount));
         const newID = '00' + newCount
 
+        const today = new Date();
+            const day = today.getDate();
+            const month = today.getMonth() + 1; // Note: January is 0
+            const year = today.getFullYear();
+            const newDate = `${day}/${month}/${year}`
+
         //generate extractor details
         const extractorDetails = {
             extractorID: newID,
             extractorName: DocType,
             extractorIcon: 'Repair',
             extractorType: 'Custom Extractor',
-            lastEditDate: '5 Aug 2023',
+            lastEditDate: newDate,
             PreTrainedFields: [],
             CustomFields : currentCustomContent
         }
