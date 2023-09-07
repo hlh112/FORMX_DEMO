@@ -178,3 +178,52 @@ let extractedData = [
 export function getExtractedData() {
     return extractedData;
 }
+
+let extractedRefinedData = [
+    {
+        fileName: 'genki.jpg',
+        filePath: '../img/test image/genki.jpg',
+        PreTrainedModelResults : [
+            {field_name: 'merchant_name', extracted_data: '元気壽司元気壽司'},
+            {field_name: 'mall_name', extracted_data: 'TSUEN WAN PL2'},
+            {field_name: 'address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'date', extracted_data: 'MAR 1, 2019'},
+            {field_name: 'total_amount', extracted_data: '411.40'},
+            {field_name: 'reference_number', extracted_data: '262985'}
+        ],
+        CustomModelResults : [
+            {field_name: 'merchant_name', extracted_data: '元気壽司'},
+            {field_name: 'mall_name', extracted_data: 'TSUEN WAN PL2'},
+            {field_name: 'address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'date', extracted_data: 'MAR 1, 2019'},
+            {field_name: 'total_amount', extracted_data: '411.40'},
+            {field_name: 'reference_number', extracted_data: '262985'},
+
+            {field_name: 'shop_address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'credit_card_type', extracted_data: 'VISA'},
+            {field_name: 'card_type', extracted_data: 'VISA'},
+            {field_name: 'credit_card', extracted_data: 'VISA'},
+
+            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'merchant_english_name', extracted_data: 'GENKI'},
+
+            {field_name: 'chinese_merchant_name', extracted_data: '元気壽司'},
+            {field_name: 'chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'chinese_shop_name', extracted_data: '元気壽司'},
+            {field_name: 'shop_chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'merchant_english_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'shop_english_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'english_merchant_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'english_shop_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'eng_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'english_name', extracted_data: 'GENKI KOUSOKU'},
+            {field_name: 'time', extracted_data: '22:30'},
+            {field_name: 'receipt_time', extracted_data: '22:30'},
+        ]
+    }
+]
+
+export function getExtractedRefinedData() {
+    return extractedRefinedData;
+}

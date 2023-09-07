@@ -9,7 +9,7 @@ import Guide from '../ui-components/guide';
 import FilePicker from '../ui-components/file-picker';
 import { getSampleSource } from '../data/fsl_sample_source';
 import callToaster from '../helper/CallToaster';
-import { getExtractedData } from '../data/extracted_data';
+import { getExtractedData, getExtractedRefinedData } from '../data/extracted_data';
 
 const ExtractorHeader = styled.div`
     border-bottom: 1px solid #e1e1e1;
@@ -113,8 +113,30 @@ export default function Extractor() {
 
 
     //Test extractor handling
-    const extractedData = getExtractedData()
     const [selectedImage, setSelectedImage] = useState('')
+
+    const extractedData = getExtractedData()
+    const extractedRefinedData = getExtractedRefinedData()
+    const [FSLSampleCount, setFSLSampleCount] = useState(false)
+    
+    const [dataSet, setDataSet] = useState(() => {
+        const storage = JSON.parse(sessionStorage.getItem("sampleCount"));
+        if (storage === true) {
+            return extractedRefinedData
+        } else {
+            return extractedData
+        }
+    })
+
+    useEffect(() => {
+        const storage = JSON.parse(sessionStorage.getItem("sampleCount"));
+        if ( storage === true) {
+            return setDataSet(extractedRefinedData)
+        } else {
+            return setDataSet(extractedData)
+    }}, [FSLSampleCount])
+
+    sessionStorage.setItem("sampleCount", JSON.stringify(FSLSampleCount));
 
     const [runTesting, setRunTesting] = useState(false)
 
@@ -129,7 +151,7 @@ export default function Extractor() {
     //page composition
     return <>
         <FilePicker images={FSLSampleData} extractorID={thisExtractorID} setSampleData={setSampleData} />
-        <FilePicker images={extractedData} setSampleData={setSelectedImage} displayTestResults={displayTestResults} className='test-extractor'/>
+        <FilePicker images={dataSet} setSampleData={setSelectedImage} displayTestResults={displayTestResults} className='test-extractor'/>
         <NavbarCollapsed />
         <PageWrapper>
         <ExtractorHeader>
@@ -158,7 +180,7 @@ export default function Extractor() {
                             )
                         } else if (currentTab === 'train-models') {
                             return (
-                                <TrainModels sampleData={sampleData} setSampleData={setSampleData}/>
+                                <TrainModels sampleData={sampleData} setSampleData={setSampleData} setFSLSampleCount={setFSLSampleCount}/>
                             )
                         }
                 })()  

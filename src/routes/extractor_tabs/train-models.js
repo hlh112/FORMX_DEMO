@@ -449,8 +449,9 @@ export default function TrainModels(props) {
         
         sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractorSample));
         props.setSampleData(allExtractorSample[extractorIndex].samples)
-
+        
         handleCheckboxClick(e)
+        allExtractorSample[extractorIndex].samples.length === 0? props.setFSLSampleCount(false) : props.setFSLSampleCount(true)
     }
 
     const deleteAllSample = (e) => {
@@ -464,6 +465,7 @@ export default function TrainModels(props) {
         props.setSampleData(allExtractorSample[extractorIndex].samples)
 
         handleCheckboxClick(e)
+        props.setFSLSampleCount(false)
     }
 
     const saveSample = () => {
@@ -502,6 +504,8 @@ export default function TrainModels(props) {
 
         allExtractor[extractorIndex].samples = props.sampleData
         sessionStorage.setItem("allFSLSampleContent", JSON.stringify(allExtractor));
+
+        props.setFSLSampleCount(true)
     }
 
     const reprocessSample = () => {
@@ -522,6 +526,7 @@ export default function TrainModels(props) {
         props.setSampleData(allExtractorSample[extractorIndex].samples)
 
         callLoading('Extracting All Documents...', callToaster, 'green', 'Extraction Completed')
+        props.setFSLSampleCount(false)
     }
 
     const uploadFile = () => {
