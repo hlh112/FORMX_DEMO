@@ -306,6 +306,7 @@ export default function ManageFields(props) {
     const allSchema = JSON.parse(sessionStorage.getItem("allExtractorContent"));
     const thisExtractorID = JSON.parse(sessionStorage.getItem("selectedExtractorID"));
     const schema = allSchema.filter(item => item.extractorID === thisExtractorID)
+    const extractorName = schema[0].extractorName
     const PreTrainedContent = schema[0].PreTrainedFields
     const CustomContent = schema[0].CustomFields
 
@@ -444,6 +445,7 @@ export default function ManageFields(props) {
         fieldCustomName? defaultField.parentNode.style.display = 'flex' : defaultField.parentNode.style.display = 'none';
         
         nameField.focus()
+        nameField.select()
     }
     //change field name
     const changeFieldName = (e) => {
@@ -603,7 +605,7 @@ export default function ManageFields(props) {
                         <FieldsWrapper className='editing'>
                         {currentPreTrainedContent.length?<><ModelHead>
                             <div>
-                                <p>Pre-trained Model Fields (Receipt)</p>
+                                <p>Pre-trained Model Fields ({extractorName})</p>
                                 <p className='desc'>Fields that are readily available for extraction without further AI model training needed.</p>
                             </div>
                         </ModelHead>
@@ -680,7 +682,7 @@ export default function ManageFields(props) {
                     <div className='edit-button' onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
                 </TabHeader>
                 <FieldsWrapper>
-                {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <ModelHead>Pre-trained Model Fields (Receipt)</ModelHead> : ''}
+                {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <ModelHead>Pre-trained Model Fields ({extractorName})</ModelHead> : ''}
                     {currentPreTrainedContent.map((dataSets, index) => {
                         return <>
                             {dataSets.field_status? <FieldContainer key={index}>
@@ -724,7 +726,7 @@ export default function ManageFields(props) {
                     <div className='edit-button' onClick={enterEditMode}><BorderButtonWithIconLeft iconName='Edit' text='Edit Schema' /></div>
                 </TabHeader>
                 <FieldsWrapper>
-                {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <><ModelHead>Pre-trained Model Fields (Receipt)</ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
+                {currentPreTrainedContent.map(obj => obj.field_status).filter(value => value === true).length > 0? <><ModelHead>Pre-trained Model Fields ({extractorName})</ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
                     {extractedPreTrainedData.map((dataSets, index) => {
                             return <FieldContainer key={index}>
                                 <div>
@@ -740,7 +742,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div>null</div>
+                                <div style={{opacity:'.4'}}>No Data Extracted</div>
                             </FieldContainer>
                     })}
                 {currentCustomContent.length > 0? <><ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Train Model<MyIcon IconName='Forward'/></div></ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
@@ -759,7 +761,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div>null</div>
+                                <div style={{opacity:'.4'}}>No Data Extracted</div>
                             </FieldContainer>
                         })}
                     </FieldsWrapper>
@@ -771,7 +773,7 @@ export default function ManageFields(props) {
                                 <ToolBtn onClick={() => callToaster('red', 'Function not implemented')}><MyIcon IconName='Download'/>Download XLSX</ToolBtn>
                             </div>
                             <div>
-                                <ToolBtn onClick={resetTest}><MyIcon IconName='TestBeaker'/>Test Another file</ToolBtn>
+                                <ToolBtn onClick={testExtractor}><MyIcon IconName='TestBeaker'/>Test Another file</ToolBtn>
                                 <ToolBtn onClick={reTest}><MyIcon IconName='Refresh'/>Re-Test This File</ToolBtn>
                                 <ToolBtn onClick={resetTest} style={{marginRight:'0'}}><MyIcon IconName='Cancel'/>Clear</ToolBtn>
                             </div>

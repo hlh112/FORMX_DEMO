@@ -478,7 +478,7 @@ export default function OnboardingTest() {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div>null</div>
+                                <div style={{opacity:'.4'}}>No Data Extracted</div>
                             </FieldContainer>
                     })}
                     </SchemaWrapper>

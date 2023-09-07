@@ -41,7 +41,7 @@ const FileWrapper = styled.div`
         width: 80px;
         height: 100px;
         border-radius: 4px;
-        transition: 500ms ease 0s;
+        transition: 100ms ease 0s;
         box-sizing: border-box;
         border: 2px solid transparent;
         cursor: pointer;

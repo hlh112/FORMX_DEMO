@@ -155,10 +155,14 @@ export default function OnboardingCustom() {
         setCustomContent(newCustomContent)
 
         sessionStorage.setItem("newCustomContent", JSON.stringify(newCustomContent));
+        
+        document.querySelector('#fieldName').value = ''
     }
 
-    const removeChip = (e) => {
-        console.log('removed')
+    const removeChip = (e, value) => {
+        const newCustomContent = currentCustomContent.filter(content => content.field_name !== value)
+        setCustomContent(newCustomContent)
+        sessionStorage.setItem("newCustomContent", JSON.stringify(newCustomContent));
     }
     //Create Extractor
     const createExtractor = () => {
@@ -220,7 +224,7 @@ export default function OnboardingCustom() {
                 </InputWrapper>
                 <ChipsWrapper>
                     {currentCustomContent.map((content, key) => {
-                        return <Chip>{content.field_name}<div style={{height:'12px'}} onClick={(e) => removeChip(e)}><MyIcon IconName='Cancel'/></div></Chip>
+                        return <Chip>{content.field_name}<div style={{height:'12px'}} onClick={(e) => removeChip(e, content.field_name)}><MyIcon IconName='Cancel'/></div></Chip>
                     })}
                 </ChipsWrapper>
                 <div style={{textAlign:'right'}} onClick={createExtractor}><YellowButton text='Proceed with these fields' /></div>
