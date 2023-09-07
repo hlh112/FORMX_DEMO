@@ -632,7 +632,7 @@ export default function TrainModels(props) {
                                 <div className="green-badge"></div>
                                 <div className='ground-truth-name'>{data}</div>
                             </div>
-                            <input type='text' className='field-result ground-truth-data' placeholder='no data extracted' />
+                            <input type='text' className='field-result ground-truth-data' placeholder='' />
                         </FieldContainer>
                 })}
             </ResultsWrapper>

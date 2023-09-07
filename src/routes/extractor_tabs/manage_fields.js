@@ -365,6 +365,7 @@ export default function ManageFields(props) {
     const runTesting = () => {
         const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
         const extractedCustomModelData = getExtractedData()[0].CustomModelResults
+        console.log(extractedCustomModelData)
 
         const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
               field.field_status === true
@@ -378,12 +379,12 @@ export default function ManageFields(props) {
             extractedPreTrainModelData.every(obj2 => obj2.field_name !== obj1.default_field_name)
         );
 
-        const matchingCustomFields = extractedCustomData.filter(obj1 =>
+        const matchingCustomFields = extractedCustomModelData.filter(obj1 =>
             currentCustomContent.some(obj2 => obj2.field_name === obj1.field_name)
         );
 
         const nonMatchingCustomFields = currentCustomContent.filter(obj1 =>
-            extractedCustomData.every(obj2 => obj2.field_name !== obj1.field_name)
+            extractedCustomModelData.every(obj2 => obj2.field_name !== obj1.field_name)
         );
 
         setExtractedPreTrainedData(matchingPreTrainedFields)
@@ -403,7 +404,8 @@ export default function ManageFields(props) {
     }
 
     const reTest = () => {
-        callLoading('Extracting Document...', callToaster, 'green', 'Extraction Completed')
+        callLoading('Extracting Document...', runTesting)
+        
     }
 
     //edit mode handelings
