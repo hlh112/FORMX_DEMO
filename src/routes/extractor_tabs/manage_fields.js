@@ -278,6 +278,12 @@ const TestImageWrapper = styled.div`
     justify-content: center;
     align-items: center;
     height: calc(100% - 40px);
+    overflow: hidden;
+
+    img {
+        height: calc(100% - 100px);
+        width: fit-content;
+    }
 `
 const CustomEmpty = styled.div`
     padding: 14px 20px;
@@ -357,15 +363,18 @@ export default function ManageFields(props) {
     const [nullPreTrainedData, setNullPreTrainedData] = useState([])
     const [nullCustomData, setNullCustomData] = useState([])
     const [extractStatus, setExtractStatus] = useState(false)
+    const [selectedImage, setSelectedImage] = useState('')
 
     const testExtractor = (e) => {
         document.querySelector('.file-picker.test-extractor').classList.add('show')
     }
 
     const runTesting = () => {
-        const extractedPreTrainModelData = getExtractedData()[0].PreTrainedModelResults
-        const extractedCustomModelData = getExtractedData()[0].CustomModelResults
-        console.log(extractedCustomModelData)
+        //////
+        console.log(props.selectedImage)
+        const sampleData = props.selectedImage
+        const extractedPreTrainModelData = sampleData[0].PreTrainedModelResults
+        const extractedCustomModelData = sampleData[0].CustomModelResults
 
         const SelectedPreTrainedContent = currentPreTrainedContent.filter(field =>
               field.field_status === true
@@ -394,6 +403,8 @@ export default function ManageFields(props) {
         setExtractStatus(true)
         setEditMode(false)
         setFirstTimeTesting(true)
+        setSelectedImage(sampleData[0].filePath)
+
         //sessionStorage.setItem("ExtractStatus", JSON.stringify(true));
     }
 
@@ -781,7 +792,7 @@ export default function ManageFields(props) {
                             </div>
                         </Toolbar>
                         <TestImageWrapper>
-                            <img src='/../img/test image/test1.png' alt='' />
+                            <img src={selectedImage} alt='' />
                         </TestImageWrapper>
                     </TestingWrapper>
                 </EditModeInnerWrapper>

@@ -154,7 +154,7 @@ export default function Extractor() {
                 (() => {
                     if(currentTab === 'manage-fields') {
                             return (
-                                <ManageFields runTesting={runTesting} resetTest={resetDisplayTestResults}/>
+                                <ManageFields selectedImage={selectedImage} runTesting={runTesting} resetTest={resetDisplayTestResults} />
                             )
                         } else if (currentTab === 'train-models') {
                             return (

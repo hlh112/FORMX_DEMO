@@ -222,7 +222,13 @@ const TestImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
+    height: calc(100% - 166px);
+    overflow: hidden;
+
+    img {
+        height: calc(100% - 100px);
+        width: fit-content;
+    }
 `
 const Dialog = styled.div`
     position: absolute;
