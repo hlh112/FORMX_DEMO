@@ -6,10 +6,8 @@ let schema = [
             {field_name: 'total_amount', default_field_name: 'total_amount', field_status: true},
             {field_name: 'date', default_field_name: 'date', field_status: true},
             {field_name: 'address', default_field_name: 'address', field_status: false},
-            {field_name: 'unit_price', default_field_name: 'unit_price', field_status: false},
             {field_name: 'mall_name', default_field_name: 'mall_name', field_status: false},
             {field_name: 'reference_number', default_field_name: 'reference_number', field_status: false},
-            {field_name: 'product_name', default_field_name: 'product_name', field_status: false},
             {field_name: 'store_number', default_field_name: 'store_number', field_status: true},
             {field_name: 'payment_method', default_field_name: 'payment_method', field_status: false}
         ],

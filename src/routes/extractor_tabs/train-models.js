@@ -376,6 +376,11 @@ const TestImageWrapper = styled.div`
     align-items: center;
     width: 70%;
     background: #FAF9F8;
+
+    img {
+        height: calc(100% - 100px);
+        width: fit-content;
+    }
 `
 const ResultsWrapper = styled.div`
 padding-bottom: 50px;
