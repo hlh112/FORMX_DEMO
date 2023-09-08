@@ -162,6 +162,24 @@ const FieldContainer = styled.div`
     opacity: .4;
   }
 
+  .extracted-data {
+    background: transparent;
+    animation: fadeInAnimation 1200ms 1;
+    opacity: 1;
+
+    @keyframes fadeInAnimation {
+        0% {
+            background: transparent;
+        }
+        50% {
+            background: #DFF6DD;
+        }
+        100% {
+            background: transparent;
+        }
+      }
+  }
+
   .delete-button {
     display: none;
     padding: 0px 1px;
@@ -763,7 +781,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{currentPreTrainedContent.filter(data => data.default_field_name === dataSets.field_name)[0].field_name}</div>
                                 </div>
-                                <div>{dataSets.extracted_data}</div>
+                                <div className='extracted-data'>{dataSets.extracted_data}</div>
                             </FieldContainer>
                     })}
                     {nullPreTrainedData.map((dataSets, index) => {
@@ -772,7 +790,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div style={{opacity:'.4'}}>No Data Extracted</div>
+                                <div style={{opacity:'.4'}} className='extracted-data'>No Data Extracted</div>
                             </FieldContainer>
                     })}
                 {currentCustomContent.length > 0? <><ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Train Model<MyIcon IconName='Forward'/></div></ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
@@ -782,7 +800,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div>{dataSets.extracted_data}</div>
+                                <div className='extracted-data'>{dataSets.extracted_data}</div>
                             </FieldContainer>
                         })}
                 {nullCustomData.map((dataSets, index) => {
@@ -791,7 +809,7 @@ export default function ManageFields(props) {
                                     <div className="green-badge"></div>
                                     <div>{dataSets.field_name}</div>
                                 </div>
-                                <div style={{opacity:'.4'}}>No Data Extracted</div>
+                                <div style={{opacity:'.4'}} className='extracted-data'>No Data Extracted</div>
                             </FieldContainer>
                         })}
                     </FieldsWrapper>
