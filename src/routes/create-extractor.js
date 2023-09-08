@@ -24,9 +24,9 @@ const SolutionsWrapper = styled.div`
     gap: 20px;
     align-content: start;
     transform: translateY(0);
-    animation: fadeInAnimation 500ms 1;
+    animation: fadeAnimation 500ms 1;
 
-    @keyframes fadeInAnimation {
+    @keyframes fadeAnimation {
         0% {
             transform: translateY(100px);
         }
