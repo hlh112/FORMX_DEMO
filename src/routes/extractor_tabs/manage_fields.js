@@ -164,10 +164,10 @@ const FieldContainer = styled.div`
 
   .extracted-data {
     background: transparent;
-    animation: fadeInAnimation 1200ms 1;
+    animation: extractedGreen 1200ms 1;
     opacity: 1;
 
-    @keyframes fadeInAnimation {
+    @keyframes extractedGreen {
         0% {
             background: transparent;
         }
