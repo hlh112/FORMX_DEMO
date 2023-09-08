@@ -14,8 +14,10 @@ const Button = styled.button`
     white-space: nowrap;
 
     &:hover {
-        opacity: .5;
-        border-radius: 8px;
+        border: 1px solid #d4af1b;
+        background: #d4af1b;
+        border-radius: 4px;
+        transform: scale(.95);
     }
     
     i {
@@ -36,8 +38,8 @@ const Borderbutton = styled.button`
     white-space: nowrap;
 
     &:hover {
-        opacity: .5;
-        border-radius: 8px;
+        border-radius: 4px;
+        transform: scale(.95);
     }
     
     i {
