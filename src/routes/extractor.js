@@ -19,15 +19,18 @@ const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    transform: translateX(0);
+    transform: scale(1);
     animation: fadeInAnimation 500ms 1;
+    opacity: 1;
 
     @keyframes fadeInAnimation {
         0% {
-            transform: translateX(100px);
+            transform: scale(.99);
+            opacity: 0;
         }
         100% {
-            transform: translateX(0);
+            transform: scale(1);
+            opacity: 1;
         }
       }
 `
