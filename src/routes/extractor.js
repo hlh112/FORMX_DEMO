@@ -63,6 +63,8 @@ const TabItem = styled.div`
     font-size: 14px;
     opacity: .5;
     cursor: pointer;
+    border-bottom: solid 3px transparent;
+    transition: 400ms ease 0s;
 
     &:hover {
         opacity: .2;
@@ -161,13 +163,13 @@ export default function Extractor() {
                 <BreadcrumbItem className='selected'>{extractorName}</BreadcrumbItem>
             </Breadcrumb>
             <TabBar>
-                <TabItem className='extractor-tab selected tab-manage-fields' data-label='manage-fields' onClick={selectTab}>Manage Fields</TabItem>
-                <TabItem className='extractor-tab tab-train-models' data-label='train-models' onClick={selectTab}>Train Models</TabItem>
-                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Formatter</TabItem>
-                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Workflow</TabItem>
-                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>API</TabItem>
-                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Extraction Panel</TabItem>
-                <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Settings</TabItem>
+                    <TabItem className='extractor-tab selected tab-manage-fields' data-label='manage-fields' onClick={selectTab}>Manage Fields</TabItem>
+                    <TabItem className='extractor-tab tab-train-models' data-label='train-models' onClick={selectTab}>Train Models</TabItem>
+                    <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Formatter</TabItem>
+                    <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Workflow</TabItem>
+                    <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>API</TabItem>
+                    <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Extraction Panel</TabItem>
+                    <TabItem className='extractor-tab' data-label='' onClick={() => callToaster('red', 'Page not implemented')}>Settings</TabItem>
             </TabBar>
         </ExtractorHeader>
 

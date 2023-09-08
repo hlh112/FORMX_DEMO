@@ -583,13 +583,13 @@ export default function TrainModels(props) {
                         <TableCell className='s'><img src={sample.filePath} alt='' /></TableCell>
                         <TableCell className='m'>{sample.fileName}</TableCell>
                         <TableCell className='s' status={sample.reviewStatus}><div className='badge'>{sample.reviewStatus}</div></TableCell>
-                        <TableCell className='m'>{sample.dateUploaded}</TableCell>
                         <TableCell className='xs'>
                             <label className="switch" onClick={(e) => handleCheckboxClick(e)}>
                                 <input type="checkbox" className='switch-checkbox' defaultChecked={sample.includeStatus} />
                                 <span className="slider round"></span>
                             </label>
                         </TableCell>
+                        <TableCell className='m'>{sample.dateUploaded}</TableCell>
                         <TableCell className='xs delete-button' onClick={(e) => deleteSample(e, sample.fileName)}><MyIcon IconName='Delete' /></TableCell>
                     </TableRow>
             })}
