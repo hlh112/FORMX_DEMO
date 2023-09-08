@@ -12,6 +12,7 @@ const PageWrapper = styled.div`
     width: 100%;
     background: #FAF9F8;
     overflow-y: scroll;
+
     h3 {
         font-weight: normal;
     }
@@ -22,6 +23,17 @@ const SolutionsWrapper = styled.div`
     width: 100%;
     gap: 20px;
     align-content: start;
+    transform: translateY(0);
+    animation: fadeInAnimation 500ms 1;
+
+    @keyframes fadeInAnimation {
+        0% {
+            transform: translateY(100px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+      }
 `
 const SolutionCard = styled.div`
     border: 1px solid #e1e1e1;

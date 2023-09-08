@@ -3,6 +3,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 import { useState } from "react";
 import { BorderButtonWithIconLeft } from "./button";
 import callToaster from "../helper/CallToaster";
+import useMountTransition from "../helper/CallTransition";
 
 const TriggerWrapper = styled.div`
     position: absolute;
@@ -55,6 +56,17 @@ const GuideWrapper = styled.div`
     border-radius: 5px;
     transition: 500ms ease 0s;
     width: 300px;
+    opacity: 0;
+    overflow: hidden;
+    min-height: 0px;
+    transform: scale(.9);
+    transform-origin: right bottom;
+
+    &.show {
+        opacity: 1;
+        min-height: fit-100px;
+        transform: scale(1);
+    }
 `
 const Header = styled.div`
     display: flex;
@@ -134,6 +146,7 @@ const ButtonWrapper = styled.div`
 export default function Guide(props) {
 
     const [Toggled, setToggled] = useState(false)
+    const hasTransitionedIn = useMountTransition(Toggled, 100);
 
     const changeTab = (identifier) => {
         const tab = document.querySelectorAll(identifier)
@@ -150,7 +163,7 @@ export default function Guide(props) {
 
     //page composition
     return <>
-    {Toggled? <GuideWrapper>
+    {Toggled? <GuideWrapper className={`${hasTransitionedIn && 'show'}`}>
         <Header><div><IconWrapper><MyIcon IconName='BookAnswers'/></IconWrapper><p>Extractor Setup Guide</p></div><div className='close-btn' onClick={() => setToggled(false)}><MyIcon IconName='Cancel'/></div></Header>
         <Tip><p>This is the checklist of every steps you need to fully setup the extractor</p></Tip>
         <Section>

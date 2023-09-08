@@ -7,6 +7,7 @@ import { Icon } from '@fluentui/react/lib/Icon';
 import callToaster from "../../helper/CallToaster";
 import callLoading from "../../helper/CallLoading";
 import TeachingBubble from '../../ui-components/teachingBubble';
+import useMountTransition from "../../helper/CallTransition";
 
 const PageWrapper = styled.div`
   display: flex;
@@ -19,6 +20,21 @@ const EditModeWrapper = styled.div`
     flex-direction: column;
     width: 100%;
     height: 100%;
+    transition: 500ms ease 0s;
+`
+const EditModeOnWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    transition: 500ms ease 0s;
+    transform: translateY(100px);
+    opacity: 0;
+
+    &.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `
 const EditModeInnerWrapper = styled.div`
     display: flex;
@@ -421,6 +437,7 @@ export default function ManageFields(props) {
 
     //edit mode handelings
     const [editMode, setEditMode] = useState(false)
+    const hasTransitionedIn = useMountTransition(editMode, 100);
 
     const enterEditMode = () => {
         setEditMode(true)
@@ -599,7 +616,7 @@ export default function ManageFields(props) {
 
     //page composition
         return <PageWrapper>
-            {editMode? <EditModeWrapper>
+            {editMode? <EditModeOnWrapper className={`${hasTransitionedIn && 'show'}`}>
                 <TabHeader>
                     <div>
                         <h4>Field Schema</h4>
@@ -680,7 +697,7 @@ export default function ManageFields(props) {
                         </FieldInfoWrapper>
                     </EditFieldWrapper>
                 </EditModeInnerWrapper>
-            </EditModeWrapper> 
+            </EditModeOnWrapper> 
             : 
             <>{extractStatus===false? <EditModeWrapper>
                 <EditModeInnerWrapper>

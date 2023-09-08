@@ -6,6 +6,7 @@ import callLoading from "../../helper/CallLoading";
 import TeachingBubble from '../../ui-components/teachingBubble';
 import { YellowButton, BorderButtonWithIconLeft, BorderButton } from '../../ui-components/button';
 import FilePicker from '../../ui-components/file-picker';
+import useMountTransition from "../../helper/CallTransition";
 
 const PageWrapper = styled.div`
     display: flex;
@@ -355,9 +356,20 @@ const EmptyInnerWrapper = styled.div`
   align-items: center;
 `
 const EditorWrapper = styled.div`
-      display: flex;
-      width: 100%;
-      height: calc(100vh - 91px);
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 91px);
+    transition: 500ms ease 0s;
+
+      &.show {
+        opacity: 1;
+        transform: translateY(0); 
+      }
+
+      &.hide {
+        transform: translateY(100px);
+        opacity: 0;
+      }
 `
 const EditSchemaWrapper = styled.div`
     border-left: solid 1px #e1e1e1;
@@ -420,6 +432,8 @@ export default function TrainModels(props) {
     const [editMode, setEditMode] = useState(false)
     const [selectedImage, setSelectedImage] = useState('')
     const [selectedImagePath, setSelectedImagePath] = useState('')
+
+    const hasTransitionedIn = useMountTransition(editMode, 100);
 
     const openEditor = (fileName, filePath) => {
         setEditMode(true)
@@ -618,7 +632,7 @@ export default function TrainModels(props) {
                 </FieldsWrapper>
             </SchemaWrapper>
     </PageWrapper> : 
-    <EditorWrapper>
+    <EditorWrapper className={`${hasTransitionedIn? 'show' : 'hide'}`}>
         <TestImageWrapper>
             <img src={selectedImagePath} alt='' />
         </TestImageWrapper>

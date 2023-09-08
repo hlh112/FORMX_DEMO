@@ -19,6 +19,17 @@ const PageWrapper = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
+    transform: translateX(0);
+    animation: fadeInAnimation 500ms 1;
+
+    @keyframes fadeInAnimation {
+        0% {
+            transform: translateX(100px);
+        }
+        100% {
+            transform: translateX(0);
+        }
+      }
 `
 const InnerPageWrapper = styled.div`
 `
@@ -90,7 +101,6 @@ export default function Extractor() {
     const currentPreTrainedContent = schema[0].PreTrainedFields
     const currentCustomContent = schema[0].CustomFields
     
-
     const selectTab = (e) => {
         const activeElements = document.querySelectorAll('.extractor-tab');
         activeElements.forEach(element => {
