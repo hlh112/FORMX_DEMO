@@ -74,10 +74,12 @@ const ExtractorCard = styled.div`
        flex-direction: column;
        justify-content: center;
        align-items: center;
+       transform: scale(1);
 
        &:hover {
         background: white;
         border: 1px solid #444;
+        transform: scale(.98);
        }
 
        h3 {
@@ -121,6 +123,7 @@ const ExtractorCard = styled.div`
 
     &:hover {
         box-shadow: none;
+        transform: scale(.98);
     }
 
     .card-details {
