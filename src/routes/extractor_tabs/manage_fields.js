@@ -628,9 +628,9 @@ export default function ManageFields(props) {
                     </div>
                 </TabHeader>
                 <EditModeInnerWrapper>
-                    <TeachingBubble title='These are your data fields' content='You can add or remove the fields you want here.' count='1 of 3' arrow='left' xPosition='left: 32%' yPosition='top: 145px' primaryAction='Next' secondaryAction='' className='stepOne bubble edit-field-bubble' onClick={nextBubble} />
-                    <TeachingBubble title='Adjust the details of each field' content='Select the field you want to adjust, then edit the field settings here.' count='2 of 3' arrow='top' xPosition='left: 33%' yPosition='top: 440px' primaryAction='Next' secondaryAction='' className='stepTwo bubble edit-field-bubble' onClick={lastBubble} />
-                    <TeachingBubble title='Remember saving your changes' content='Save the changes before you leave this page.' count='3 of 3' arrow='topRight' xPosition='right: 18px' yPosition='top: 160px' primaryAction='Got it' secondaryAction='' className='stepThree bubble edit-field-bubble' onClick={dismissBubble} />
+                    <TeachingBubble title='These are your data fields' content='You can add or remove the fields you want here.' count='1 of 3' arrow='left' xPosition='left: 27%' yPosition='top: 138px' primaryAction='Next' secondaryAction='' className='stepOne bubble edit-field-bubble' onClick={nextBubble} />
+                    <TeachingBubble title='Adjust the details of each field' content='Select the field you want to adjust, then edit the field settings here.' count='2 of 3' arrow='top' xPosition='left: 31%' yPosition='top: 350px' primaryAction='Next' secondaryAction='' className='stepTwo bubble edit-field-bubble' onClick={lastBubble} />
+                    <TeachingBubble title='Remember saving your changes' content='Save the changes before you leave this page.' count='3 of 3' arrow='topRight' xPosition='right: 18px' yPosition='top: 70px' primaryAction='Got it' secondaryAction='' className='stepThree bubble edit-field-bubble' onClick={dismissBubble} />
                     <SchemaWrapper>
                         <FieldsWrapper className='editing'>
                         {currentPreTrainedContent.length?<><ModelHead>
@@ -701,8 +701,8 @@ export default function ManageFields(props) {
             : 
             <>{extractStatus===false? <EditModeWrapper>
                 <EditModeInnerWrapper>
-                <TeachingBubble title='Access your data fields in this tab' content='You can adjust the data you want to extract by editing the field schema inside this tab.' count='1 of 2' arrow='top' xPosition='left: 80px' yPosition='top: 110px' primaryAction='Next' secondaryAction='' className='stepOne bubble manage-field-bubble' onClick={nextBubble} />
-                <TeachingBubble title='Click here to edit the data fields' content='Start editing the data fields schema by clicking this button here.' count='2 of 2' arrow='left' xPosition='left: 32%' yPosition='top: 95px' primaryAction='Got it' secondaryAction='' className='stepTwo bubble manage-field-bubble' onClick={dismissBubble} />
+                <TeachingBubble title='Access your data fields in this tab' content='You can adjust the data you want to extract by editing the field schema inside this tab.' count='1 of 2' arrow='top' xPosition='left: 20px' yPosition='top: 110px' primaryAction='Next' secondaryAction='' className='stepOne bubble manage-field-bubble' onClick={nextBubble} />
+                <TeachingBubble title='Click here to edit the data fields' content='Start editing the data fields schema by clicking this button here.' count='2 of 2' arrow='left' xPosition='left: 30%' yPosition='top: 95px' primaryAction='Got it' secondaryAction='' className='stepTwo bubble manage-field-bubble' onClick={dismissBubble} />
                 <SchemaWrapper>
                 <TabHeader>
                     <div>
