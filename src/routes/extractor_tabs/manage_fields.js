@@ -303,7 +303,7 @@ const FieldInfoContent = styled.div`
         }
 
         select {
-            height: 26px;
+            height: 30px;
         }
     }
 `
