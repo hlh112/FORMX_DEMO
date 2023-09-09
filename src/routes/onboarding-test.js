@@ -89,7 +89,7 @@ const InnerTestingWrapper = styled.div`
 const ModelHead = styled.div`
   background: #F6F8FA;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 600;
   color: #3D8AA1;
   padding: 12px 12px 12px 20px;
   display: flex;

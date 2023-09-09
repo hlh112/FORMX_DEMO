@@ -57,6 +57,7 @@ const NavbarButton = styled.div`
         display: block;
         padding: 12px 0px;
         border-radius: 4px;
+        text-wrap: nowrap;
 
         &:hover {
             background: #e9e9e9;

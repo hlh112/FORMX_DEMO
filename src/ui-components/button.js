@@ -12,6 +12,7 @@ const Button = styled.button`
     min-width: fit-content;
     box-sizing: border-box;
     white-space: nowrap;
+    letter-spacing: 0.3px;
 
     &:hover {
         border: 1px solid #d4af1b;
@@ -36,6 +37,7 @@ const Borderbutton = styled.button`
     min-width: fit-content;
     box-sizing: border-box;
     white-space: nowrap;
+    letter-spacing: 0.3px;
 
     &:hover {
         border-radius: 4px;

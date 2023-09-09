@@ -45,7 +45,7 @@ const Breadcrumb = styled.div`
 const BreadcrumbItem = styled.p`
     display: inline-block;
     transition: 500ms ease 0s;
-    font-size: 16px;
+    font-size: 14px;
 
     &.selected {
         font-weight: bold;
@@ -79,6 +79,7 @@ const TabItem = styled.div`
     cursor: pointer;
     border-bottom: solid 3px transparent;
     transition: 400ms ease 0s;
+    font-size: 12px;
 
     &:hover {
         opacity: .2;
