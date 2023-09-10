@@ -350,15 +350,26 @@ export default function ManageFields(props) {
     const PreTrainedContent = schema[0].PreTrainedFields
     const CustomContent = schema[0].CustomFields
 
-    const [firstTimeTesting, setFirstTimeTesting] = useState(false)
+    const [firstTimeTesting, setFirstTimeTesting] = useState(() => {
+        const storage = JSON.parse(sessionStorage.getItem("firstTimeTesting"));
+        if (storage) {
+            return storage
+        } else {
+            return 0
+        }
+    })
 
     const triggerGuide = () => {
         document.querySelector('.guide-trigger').click()
     }
 
     useEffect(() => {
-        if (firstTimeTesting === true) {
+        console.log(firstTimeTesting)
+        if (firstTimeTesting > 0 && firstTimeTesting < 2) {
             setTimeout(triggerGuide, 1500)
+            setFirstTimeTesting(firstTimeTesting + 1)
+            sessionStorage.setItem("firstTimeTesting", JSON.stringify(firstTimeTesting));
+            
         }
     }, [firstTimeTesting])
 
@@ -436,7 +447,10 @@ export default function ManageFields(props) {
         setNullCustomData(nonMatchingCustomFields)
         setExtractStatus(true)
         setEditMode(false)
-        setFirstTimeTesting(true)
+        console.log(firstTimeTesting)
+        setFirstTimeTesting(firstTimeTesting + 1)
+        sessionStorage.setItem("firstTimeTesting", JSON.stringify(firstTimeTesting));
+        console.log(firstTimeTesting)
         setSelectedImage(sampleData[0].filePath)
 
         //sessionStorage.setItem("ExtractStatus", JSON.stringify(true));
