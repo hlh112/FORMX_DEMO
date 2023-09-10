@@ -161,9 +161,17 @@ export default function Guide(props) {
 
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
 
+    const triggerGuide = () => {
+        if (Toggled === true) {
+            setToggled(false)
+        } else {
+            setToggled(true)
+        }
+    }
+
     //page composition
     return <>
-    {Toggled? <GuideWrapper className={`${hasTransitionedIn && 'show'}`}>
+    {Toggled? <GuideWrapper className={`guide-wrapper ${hasTransitionedIn && 'show'}`}>
         <Header><div><IconWrapper><MyIcon IconName='BookAnswers'/></IconWrapper><p>Extractor Setup Guide</p></div><div className='close-btn' onClick={() => setToggled(false)}><MyIcon IconName='Cancel'/></div></Header>
         <Tip><p>This is the checklist of every steps you need to fully setup the extractor</p></Tip>
         <Section>
@@ -182,7 +190,7 @@ export default function Guide(props) {
 
     </GuideWrapper>
     : ''}
-    <TriggerWrapper className='guide-trigger' onClick={() => setToggled(true)}>
+    <TriggerWrapper className='guide-trigger' onClick={() => triggerGuide()}>
         <IconWrapper><MyIcon IconName='BookAnswers'/></IconWrapper><p>Setup Guide</p>
     </TriggerWrapper>   
     </>
