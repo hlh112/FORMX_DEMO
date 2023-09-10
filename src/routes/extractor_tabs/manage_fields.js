@@ -755,7 +755,7 @@ export default function ManageFields(props) {
                             </FieldContainer> : ''}
                         </>
                     })}
-                {currentCustomContent.length > 0? <ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Train Model<MyIcon IconName='Forward'/></div></ModelHead> : ''}
+                {currentCustomContent.length > 0? <ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Improve Accuracy<MyIcon IconName='Forward'/></div></ModelHead> : ''}
                 {currentCustomContent.map((dataSets, index) => {
                     return <FieldContainer key={index}>
                         <div>
@@ -807,7 +807,7 @@ export default function ManageFields(props) {
                                 <div style={{opacity:'.4'}} className='extracted-data'>No Data Extracted</div>
                             </FieldContainer>
                     })}
-                {currentCustomContent.length > 0? <><ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Train Model<MyIcon IconName='Forward'/></div></ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
+                {currentCustomContent.length > 0? <><ModelHead>Custom Model Fields (Instant) <div className='train-model-button' onClick = {() => changeTab('.tab-train-models')}>Improve Accuracy<MyIcon IconName='Forward'/></div></ModelHead><FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer></> : ''}
                 {extractedCustomData.map((dataSets, index) => {
                             return <FieldContainer key={index}>
                                 <div>
