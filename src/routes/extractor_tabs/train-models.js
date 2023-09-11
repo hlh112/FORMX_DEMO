@@ -44,7 +44,7 @@ const SchemaWrapper = styled.div`
 `
 const FieldsWrapper = styled.div`
     height: 100%;
-`
+` 
 const FieldInnerWrapper = styled.div`
     height: calc(50% - 82px);
     overflow-y: scroll;
@@ -586,8 +586,8 @@ export default function TrainModels(props) {
                 <TableHead className='s'>File Image</TableHead>
                 <TableHead className='m'>File Name</TableHead>
                 <TableHead className='s'>Status</TableHead>
-                <TableHead className='s'>Uploaded at</TableHead>
                 <TableHead className='m'>Including in Training Set</TableHead>
+                <TableHead className='s'>Uploaded at</TableHead>
                 <TableHead className='xs'>Action</TableHead>
             </TableRow>
             {props.sampleData.map((sample,index) => {

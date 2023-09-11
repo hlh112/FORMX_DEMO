@@ -186,7 +186,7 @@ let extractedRefinedData = [
         PreTrainedModelResults : [
             {field_name: 'merchant_name', extracted_data: '元気壽司元気壽司'},
             {field_name: 'mall_name', extracted_data: 'TSUEN WAN PL2'},
-            {field_name: 'address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'address', extracted_data: 'SHOP B105-B108 TSUEN WAN PL2 TSUEN WAN NT'},
             {field_name: 'date', extracted_data: '07/21'},
             {field_name: 'total_amount', extracted_data: '411.40'},
             {field_name: 'reference_number', extracted_data: '262985'}
@@ -194,12 +194,12 @@ let extractedRefinedData = [
         CustomModelResults : [
             {field_name: 'merchant_name', extracted_data: '元気壽司'},
             {field_name: 'mall_name', extracted_data: 'TSUEN WAN PL2'},
-            {field_name: 'address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'address', extracted_data: 'SHOP B105-B108 TSUEN WAN PL2 TSUEN WAN NT'},
             {field_name: 'date', extracted_data: 'MAR 1, 2019'},
             {field_name: 'total_amount', extracted_data: '411.40'},
             {field_name: 'reference_number', extracted_data: '262985'},
 
-            {field_name: 'shop_address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
+            {field_name: 'shop_address', extracted_data: 'SHOP B105-B108 TSUEN WAN PL2 TSUEN WAN NT'},
             {field_name: 'credit_card_type', extracted_data: 'VISA'},
             {field_name: 'card_type', extracted_data: 'VISA'},
             {field_name: 'credit_card', extracted_data: 'VISA'},
@@ -322,7 +322,7 @@ let extractedRefinedData = [
             {field_name: 'reference_number', extracted_data: '960152'}
         ],
         CustomModelResults : [
-            {field_name: 'merchant_name', extracted_data: '画Y8T8'},
+            {field_name: 'merchant_name', extracted_data: '一田 YATA'},
             {field_name: 'mall_name', extracted_data: 'V City'},
             {field_name: 'address', extracted_data: 'V City 地下'},
             {field_name: 'date', extracted_data: '10/03/19'},
