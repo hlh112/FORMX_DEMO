@@ -195,7 +195,11 @@ let schema = [
         PreTrainedFields : [],
         CustomFields : [
             {field_name: 'movie_name', field_type: 'single-line text'},
-            {field_name: 'cinema_name', field_type: 'single-line text'}
+            {field_name: 'cinema_name', field_type: 'single-line text'},
+            {field_name: 'date', field_type: 'date'},
+            {field_name: 'time', field_type: 'time'},
+            {field_name: 'house', field_type: 'single-line text'},
+            {field_name: 'seat', field_type: 'single-line text'},
         ],
     }
 ]

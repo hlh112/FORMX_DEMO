@@ -151,6 +151,76 @@ let sampleSource = [
             {field_name: 'purchase_time', extracted_data: '21:37'},
        ]
    },
+   {
+    fileName: 'ticket_sample.png',
+    filePath: '../img/test image/ticket_sample.png',
+    PreTrainedModelResults : [
+    ],
+    CustomModelResults : [
+        {field_name: 'movie_name', extracted_data: '出猫特攻隊 8ad Genius'},
+        {field_name: 'movie', extracted_data: '出猫特攻隊 8ad Genius'},
+
+        {field_name: 'movie_name_en', extracted_data: '8ad Genius'},
+        {field_name: 'movie_name_eng', extracted_data: '8ad Genius'},
+        {field_name: 'movie_name_english', extracted_data: '8ad Genius'},
+        {field_name: 'movie_english_name', extracted_data: '8ad Genius'},
+        {field_name: 'movie_eng_name', extracted_data: '8ad Genius'},
+        {field_name: 'movie_en_name', extracted_data: '8ad Genius'},
+        {field_name: 'english_movie_name', extracted_data: 'Bad Genius'},
+        {field_name: 'eng_movie_name', extracted_data: '8ad Genius'},
+        {field_name: 'en_movie_name', extracted_data: '8ad Genius'},
+
+        {field_name: 'movie_name_ch', extracted_data: '出猫特攻隊'},
+        {field_name: 'movie_name_chinese', extracted_data: '出猫特攻隊'},
+        {field_name: 'movie_chinese_name', extracted_data: '出猫特攻隊'},
+        {field_name: 'movie_ch_name', extracted_data: '出猫特攻隊'},
+        {field_name: 'chinese_movie_name', extracted_data: '出猫特攻隊'},
+        {field_name: 'ch_movie_name', extracted_data: '出猫特攻隊'},
+
+        {field_name: 'cinema_name', extracted_data: 'broadway circuit 百老匡'},
+        {field_name: 'cinema', extracted_data: 'broadway circuit 百老匡'},
+
+        {field_name: 'cinema_name_english', extracted_data: 'broadway circuit'},
+        {field_name: 'cinema_english', extracted_data: 'broadway circuit'},
+        {field_name: 'cinema_name_eng', extracted_data: 'broadway circuit'},
+        {field_name: 'cinema_eng', extracted_data: 'broadway circuit'},
+        {field_name: 'cinema_name_en', extracted_data: 'broadway circuit'},
+        {field_name: 'cinema_en', extracted_data: 'broadway circuit'},
+
+        {field_name: 'cinema_name_chinese', extracted_data: '百老匡'},
+        {field_name: 'cinema_chinese', extracted_data: '百老匡'},
+        {field_name: 'cinema_name_ch', extracted_data: '百老匡'},
+        {field_name: 'cinema_ch', extracted_data: '百老匡'},
+
+        {field_name: 'branch', extracted_data: '葵芳 KWAI FONG'},
+        {field_name: 'branch_name', extracted_data: '葵芳 KWAI FONG'},
+        {field_name: 'location', extracted_data: '葵芳 KWAI FONG'},
+        {field_name: 'region', extracted_data: '葵芳 KWAI FONG'},
+
+        {field_name: 'branch_english', extracted_data: 'KWAI FONG'},
+        {field_name: 'location_english', extracted_data: 'KWAI FONG'},
+        {field_name: 'branch_eng', extracted_data: 'KWAI FONG'},
+        {field_name: 'location_eng', extracted_data: 'KWAI FONG'},
+        {field_name: 'branch_en', extracted_data: 'KWAI FONG'},
+        {field_name: 'location_en', extracted_data: 'KWAI FONG'},
+
+        {field_name: 'branch_chinese', extracted_data: '葵芳'},
+        {field_name: 'location_chinese', extracted_data: '葵芳'},
+        {field_name: 'branch_ch', extracted_data: '葵芳'},
+        {field_name: 'location_ch', extracted_data: '葵芳'},
+
+        {field_name: 'house', extracted_data: '4'},
+        {field_name: 'seat', extracted_data: 'G3'},
+        {field_name: 'seat_number', extracted_data: 'G3'},
+        {field_name: 'price', extracted_data: '70'},
+        {field_name: 'fee', extracted_data: '70'},
+        {field_name: 'category', extracted_data: 'IIA'},
+        {field_name: 'movie_category', extracted_data: 'IIA'},
+
+        {field_name: 'date', extracted_data: '29/07/2017'},
+        {field_name: 'time', extracted_data: '05:25 PM'},
+    ]
+},
 ]
 
 export function getSampleSource() {
