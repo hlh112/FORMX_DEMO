@@ -233,7 +233,7 @@ export default function OnboardingCustom() {
                 <h3>What type of <strong>Document</strong> are you extracting?</h3>
                 <p>Please provide a descriptive and meaningful document name in full form<br></br>e.g. use Business Registration' instead of 'BR’</p>
                 <InputWrapper>
-                    <input id='docType' type='text' placeholder='Try "movie ticket"'></input>
+                    <input id='docType' type='text' placeholder='Enter the document type you want to process..'></input>
                     <div onClick={() => callLoading('Generating Fields...', generateFields)}><YellowButton text='Generate Fields' /></div>
                 </InputWrapper>
             </TestWrapper>}
