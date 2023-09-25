@@ -431,7 +431,7 @@ export default function OnboardingTest() {
     //page composition
     return <PageWrapper>
         <FilePicker images={extractedData} setSampleData={setSelectedImage} displayTestResults={displayTestResults}/>
-        <TeachingBubble title='The data to extract' content='These Data fields are readily available for extraction right out of the box using the FormX pre-built solution. Feel free to play around and select the fields that suit your needs!' count='1 of 2' arrow='left' xPosition='left: 20%' yPosition='top: 120px' primaryAction='Next' secondaryAction='' className='stepOne bubble' onClick={nextBubble} />
+        <TeachingBubble title='The data to extract' content='These Data fields are readily available for extraction right out of the box using the FormX pre-built solution. Feel free to play around and select the fields that suit your needs!' count='1 of 2' arrow='left' xPosition='left: 270px' yPosition='top: 126px' primaryAction='Next' secondaryAction='' className='stepOne bubble' onClick={nextBubble} />
         <TeachingBubble title='Test the data extraction here' content='Then, followed by uploading a file and see how the FormX data extraction works! Don’t have a file on hand? No worries, you can use our dummy samples to test the data extraction for now and setup later!' count='2 of 2' arrow='right' xPosition='right: 50%' yPosition='top: 55%' primaryAction='Got it' secondaryAction='' className='stepTwo bubble' onClick={dismissBubble} />
         <EditModeWrapper>
         <Header>

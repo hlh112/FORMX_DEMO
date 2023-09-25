@@ -3,15 +3,14 @@ import styled from "styled-components";
 import { Icon } from '@fluentui/react/lib/Icon';
 import callToaster from "../../helper/CallToaster";
 import callLoading from "../../helper/CallLoading";
-import TeachingBubble from '../../ui-components/teachingBubble';
 import { YellowButton, BorderButtonWithIconLeft, BorderButton } from '../../ui-components/button';
 import FilePicker from '../../ui-components/file-picker';
 import useMountTransition from "../../helper/CallTransition";
 
 const PageWrapper = styled.div`
     display: flex;
-    width: 100%;
-    height: 100vh;
+    width: calc(100% - 240px);
+    height: 100%;
 `
 const LeftWrapper = styled.div`
     width: 100%;
@@ -41,20 +40,63 @@ const SchemaWrapper = styled.div`
     width: 30%;
     height: 100%;
     overflow-y: scroll;
+    background: #faf9f8;
 `
 const FieldsWrapper = styled.div`
-    height: 100%;
+    padding-bottom: 40px;
 ` 
-const FieldInnerWrapper = styled.div`
-    height: calc(50% - 82px);
-    overflow-y: scroll;
-`
+const FieldsSectionWrapper = styled.div`
+  position: relative;
+  color: #797979;
+
+  &.selected {
+    border: 2px solid #3D8AA1;
+    background: white;
+    color: #201F1E;
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.2);
+    animation: impactField 1.5s;
+    border: 2px solid #25D0B1;
+
+
+    @keyframes impactField {
+        0% {
+            border: 2px solid transparent;
+            background: transparent;
+            box-shadow: 2px 5px 20px rgba(0, 0, 0, 0);
+        }
+        100% {
+            border: 2px solid #25D0B1;
+            background: white;
+            box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.2);
+        }
+      }
+
+    &:before {
+        content: 'Impacting Fields';
+        position: absolute;
+        top: 0px;
+        right: -2px;
+        font-size: 12px;
+        color: white;
+        background: #25D0B1;
+        padding: 6px 10px;
+        box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.2);
+        display: flex;
+    }
+
+    &:hover {
+        &:before {
+            display: none;
+        }
+    }
+  }
+` 
 const ModelHead = styled.div`
   background: #F6F8FA;
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 600;
   color: #3D8AA1;
-  padding: 12px 12px 12px 20px;
+  padding: 12px;
   display: flex;
   gap: 10px;
   justify-content: space-between;
@@ -86,7 +128,7 @@ const ModelHead = styled.div`
 `
 const FieldContainer = styled.div`
   font-size: 12px;
-  padding: 12px 20px;
+  padding: 12px;
   display: flex;
   justify-content: space-between;
   transition: 500ms ease 0s;
@@ -141,7 +183,7 @@ const FieldContainer = styled.div`
   }
 
   &:last-child {
-    margin-bottom: 24px;
+    margin-bottom: 8px;
   }
 
   .field-type {
@@ -229,15 +271,15 @@ const TableHead = styled.th`
 
     &.xs {
         width: 50px;
-        min-width: 50px;
+        min-width: 40px;
     }
     &.s {
         width: 100px;
-        min-width: 100px;
+        min-width: 80px;
     }
     &.m {
         width: 150px;    
-        min-width: 150px;       
+        min-width: 120px;       
     }
 `
 const TableCell = styled.td`
@@ -246,22 +288,32 @@ const TableCell = styled.td`
         max-height: 80px;
         border-radius: 4px;
     }
+
     font-size: 12px;
     color: #323130;
     padding: 14px 20px;
     text-align: left;
 
+    &.include-switch {
+
+        p {
+            display: inline-block;
+            margin-left: 10px;
+            vertical-align: sub;
+        }
+    }
+
     &.xs {
         width: 50px;
-        min-width: 50px;
+        min-width: 40px;
     }
     &.s {
         width: 100px;
-        min-width: 100px;
+        min-width: 80px;
     }
     &.m {
         width: 150px;    
-        min-width: 150px;    
+        min-width: 120px;    
     }
     .switch {
         position: relative;
@@ -337,7 +389,7 @@ const TableCell = styled.td`
 const EmptyWrapper = styled.div`
   background: #F6FDFC;
   width: 100%;
-  height: calc(100% - 155px);
+  height: calc(100% - 65px);
   padding: 20px;
   box-sizing: border-box;
   transition: 500ms ease 0s;
@@ -357,9 +409,10 @@ const EmptyInnerWrapper = styled.div`
 `
 const EditorWrapper = styled.div`
     display: flex;
-    width: 100%;
-    height: calc(100vh - 91px);
+    width: calc(100% - 240px);
+    height: 100%;
     transition: 500ms ease 0s;
+    overflow-x: scroll;
 
       &.show {
         opacity: 1;
@@ -372,9 +425,6 @@ const EditorWrapper = styled.div`
       }
 `
 const EditSchemaWrapper = styled.div`
-    border-left: solid 1px #e1e1e1;
-    width: 30%;
-    min0width: 390px; 
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -386,39 +436,63 @@ const TestImageWrapper = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 70%;
-    background: #FAF9F8;
+    width: 65%;
+    background: #F6F8FA;
 
     img {
-        height: calc(100% - 100px);
-        width: fit-content;
+        width: 80%;
+        max-width: fit-content;
+        max-height: calc(100% - 100px);
     }
 `
 const ResultsWrapper = styled.div`
-padding-bottom: 50px;
+    padding-bottom: 30px;
 `
 const ButtonWrapper = styled.div`
       border-top: 1px solid #e1e1e1;
-      padding: 12px 12px 24px 12px;
+      padding: 12px 12px 20px 12px;
       display: flex;
       gap: 6px;
       justify-content: end;
       background: white;
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      width: calc(30% - 43px);
-      overflow-x: scroll;
 `
+const Desc = styled.div`
+    background: #fff;
+    padding: 0 12px;
+    p {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 1.5;
+        margin: 0;
+        padding: 12px 0;
+    }
+`
+const RightWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    width: 35%;
+    border-left: solid 1px #e1e1e1;
+`
+
 
 export default function TrainModels(props) {
     const MyIcon = (props) => <Icon iconName={props.IconName} className={props.ClassName}/>;
-
     const thisExtractorID = JSON.parse(sessionStorage.getItem("selectedExtractorID"));
 
     const allSchema = JSON.parse(sessionStorage.getItem("allExtractorContent"));
     const schema = allSchema.filter(item => item.extractorID === thisExtractorID)
+    const extractorName = schema[0].extractorName
+    const PreTrainedContent = schema[0].PreTrainedFields
     const CustomContent = schema[0].CustomFields
+
+    const [currentPreTrainedContent, setPreTrainedContent] = useState(() => {
+        const storage = JSON.parse(sessionStorage.getItem(thisExtractorID + "_newPreTrainedContent"));
+        if (storage) {
+            return storage
+        } else {
+            return PreTrainedContent
+        }
+    });
 
     const [currentCustomContent, setCustomContent] = useState(() => {
         const storage = JSON.parse(sessionStorage.getItem(thisExtractorID + "_newCustomContent"));
@@ -442,16 +516,22 @@ export default function TrainModels(props) {
         console.log(filePath)
     }
 
-    useEffect(() => {
-        if (editMode === true) {
-            document.querySelector('.guide-trigger').classList.add('hide')  
-        } else if (editMode === false) {
-            document.querySelector('.guide-trigger').classList.remove('hide')  
-        }
-    }, [editMode])
-
     const handleCheckboxClick = (e) => {
         e.stopPropagation();
+    }
+
+    const handleIncludeStatus = (e) => {
+        
+        handleCheckboxClick(e)
+        const checkStatus = e.currentTarget.querySelector('input').checked
+        const includeStatus = e.currentTarget.nextElementSibling
+
+        if (checkStatus) {
+            includeStatus.innerText = 'Included'
+        } else {
+            includeStatus.innerText = 'Excluded'
+        }
+
     }
 
     const deleteSample = (e, deleteSampleFileName) => {
@@ -484,7 +564,7 @@ export default function TrainModels(props) {
 
     const saveSample = () => {
         setEditMode(false)
-        callToaster('green', 'Sample Data Mark as Reviewed')
+        callToaster('green', 'Changes saved. Sample Data is now used in model training')
 
         const selectedData = props.sampleData.filter(data => data.fileName === selectedImage)
         const index = props.sampleData.findIndex(obj => obj.fileName === selectedImage)
@@ -547,6 +627,10 @@ export default function TrainModels(props) {
         document.querySelector('.file-picker').classList.add('show')
     }
 
+    const closeModal = () => {
+        setEditMode(false)
+    }
+
     ////////////////
     
     const currentFieldName = currentCustomContent.map(obj => obj.field_name);
@@ -565,7 +649,7 @@ export default function TrainModels(props) {
         <LeftWrapper>
         <TabHeader>
             <div>
-                <h4>Training Sample Data</h4>
+                <h4>Train AI Models</h4>
                 <p>To fine-tune the extraction performance, you can provide FormX with some sample data to train the extraction model.</p>
             </div>
         </TabHeader>
@@ -585,8 +669,7 @@ export default function TrainModels(props) {
                 <TableHead className='xs'><input className='checkbox' type='checkbox' /></TableHead>
                 <TableHead className='s'>File Image</TableHead>
                 <TableHead className='m'>File Name</TableHead>
-                <TableHead className='s'>Status</TableHead>
-                <TableHead className='m'>Including in Training Set</TableHead>
+                <TableHead className='m'>Include in Model Training</TableHead>
                 <TableHead className='s'>Uploaded at</TableHead>
                 <TableHead className='xs'>Action</TableHead>
             </TableRow>
@@ -596,14 +679,14 @@ export default function TrainModels(props) {
                         <TableCell className='xs'><input className='checkbox' type='checkbox' onClick={(e) => handleCheckboxClick(e)} /></TableCell>
                         <TableCell className='s'><img src={sample.filePath} alt='' /></TableCell>
                         <TableCell className='m'>{sample.fileName}</TableCell>
-                        <TableCell className='s' status={sample.reviewStatus}><div className='badge'>{sample.reviewStatus}</div></TableCell>
-                        <TableCell className='xs'>
-                            <label className="switch" onClick={(e) => handleCheckboxClick(e)}>
+                        <TableCell className='m include-switch'>
+                            <label className="switch" onClick={(e) => handleIncludeStatus(e)}>
                                 <input type="checkbox" className='switch-checkbox' defaultChecked={sample.includeStatus} />
                                 <span className="slider round"></span>
                             </label>
+                            <p className='include-status'>{sample.includeStatus? 'Included':'Excluded'}</p>
                         </TableCell>
-                        <TableCell className='m'>{sample.dateUploaded}</TableCell>
+                        <TableCell className='s'>{sample.dateUploaded}</TableCell>
                         <TableCell className='xs delete-button' onClick={(e) => deleteSample(e, sample.fileName)}><MyIcon IconName='Delete' /></TableCell>
                     </TableRow>
             })}
@@ -618,28 +701,43 @@ export default function TrainModels(props) {
         }
         </LeftWrapper>
         <SchemaWrapper>
-                <FieldsWrapper>
-                {currentCustomContent.length > 0? <ModelHead>Custom Model Fields (Instant)</ModelHead> : ''}
-                {currentCustomContent.map((dataSets, index) => {
-                    return <FieldContainer key={index}>
-                        <div>
-                            <div className="green-badge"></div>
-                            <div>{dataSets.field_name}</div>
-                        </div>
-                        <div className='field-type'>{dataSets.field_type}</div>
-                    </FieldContainer>
-                })}
-                </FieldsWrapper>
-            </SchemaWrapper>
+            <FieldsWrapper>
+                <FieldsSectionWrapper>
+                    {currentPreTrainedContent.length > 0? <ModelHead>Pre-Trained Model Fields ({extractorName})</ModelHead> : ''}
+                    {currentPreTrainedContent.map((dataSets, index) => {
+                        return <FieldContainer key={index}>
+                            <div>
+                                <div className="green-badge"></div>
+                                <div>{dataSets.field_name}</div>
+                            </div>
+                        </FieldContainer>
+                    })}
+                </FieldsSectionWrapper>
+                <FieldsSectionWrapper className='selected'>
+                    {currentCustomContent.length > 0? <ModelHead>Custom Model Fields (Instant)</ModelHead> : ''}
+                    {currentCustomContent.map((dataSets, index) => {
+                        return <FieldContainer key={index}>
+                            <div>
+                                <div className="green-badge"></div>
+                                <div>{dataSets.field_name}</div>
+                            </div>
+                        </FieldContainer>
+                    })}
+                </FieldsSectionWrapper>
+            </FieldsWrapper>
+        </SchemaWrapper>
     </PageWrapper> : 
     <EditorWrapper className={`${hasTransitionedIn? 'show' : 'hide'}`}>
         <TestImageWrapper>
             <img src={selectedImagePath} alt='' />
         </TestImageWrapper>
+        <RightWrapper>
         <EditSchemaWrapper>
             <div>
-            <ModelHead>Custom Model Fields (Instant)</ModelHead>
-            <FieldContainer className='display-only'><div>Fields</div><div>Extracted Data</div></FieldContainer>
+            <Desc>
+                <p>Review and correct the extracted data. Once saved, the corrected data above will be used to train the AI model for better extraction performance</p>
+            </Desc>
+            <ModelHead><p>Custom Model Fields (Instant)</p><p>Extracted Data</p></ModelHead>
             <ResultsWrapper>
                 {MatchingFields.map((dataSets, index) => {
                     return <FieldContainer key={index} className='editable-ground-truth'>
@@ -661,11 +759,12 @@ export default function TrainModels(props) {
                 })}
             </ResultsWrapper>
             </div>
-            <ButtonWrapper>
-                <div onClick={reprocessSample}><BorderButton text='Reprocess Extraction'/></div>
-                <div onClick={saveSample}><YellowButton text='Mark as Reviewed'/></div>
-            </ButtonWrapper>
         </EditSchemaWrapper>
+        <ButtonWrapper>
+            <div onClick={closeModal}><BorderButton text='Cancel'/></div>
+            <div onClick={saveSample}><YellowButton text='Save Sample Data'/></div>
+        </ButtonWrapper>
+        </RightWrapper>
     </EditorWrapper>
     }
     </>
