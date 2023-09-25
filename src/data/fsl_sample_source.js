@@ -81,7 +81,7 @@ let sampleSource = [
         fileName: 'genki.jpg',
         filePath: '../img/test image/genki.jpg',
         initialGroundTruth: [
-            {field_name: 'merchant_name', extracted_data: '元気壽司'},
+            {field_name: 'merchant_name', extracted_data: '元気壽司元気壽司'},
             {field_name: 'mall_name', extracted_data: 'TSUEN WAN PL2'},
             {field_name: 'address', extracted_data: 'SHOP B185-B188 TSUEN WAN PL2 TSUEN WAN NT'},
             {field_name: 'date', extracted_data: '07/21'},
@@ -95,14 +95,14 @@ let sampleSource = [
             {field_name: 'card_type', extracted_data: 'VISA'},
             {field_name: 'credit_card', extracted_data: 'VISA'},
 
-            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司元気壽司'},
             {field_name: 'merchant_english_name', extracted_data: 'GENKI KOUSOKU - 5164'},
 
-            {field_name: 'chinese_merchant_name', extracted_data: '元気壽司'},
-            {field_name: 'chinese_name', extracted_data: '元気壽司'},
-            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司'},
-            {field_name: 'chinese_shop_name', extracted_data: '元気壽司'},
-            {field_name: 'shop_chinese_name', extracted_data: '元気壽司'},
+            {field_name: 'chinese_merchant_name', extracted_data: '元気壽司元気壽司'},
+            {field_name: 'chinese_name', extracted_data: '元気壽司元気壽司'},
+            {field_name: 'merchant_chinese_name', extracted_data: '元気壽司元気壽司'},
+            {field_name: 'chinese_shop_name', extracted_data: '元気壽司元気壽司'},
+            {field_name: 'shop_chinese_name', extracted_data: '元気壽司元気壽司'},
             {field_name: 'merchant_english_name', extracted_data: 'GENKI KOUSOKU - 5164'},
             {field_name: 'shop_english_name', extracted_data: 'GENKI KOUSOKU - 5164'},
             {field_name: 'english_merchant_name', extracted_data: 'GENKI KOUSOKU - 5164'},
@@ -154,9 +154,7 @@ let sampleSource = [
    {
     fileName: 'ticket_sample.png',
     filePath: '../img/test image/ticket_sample.png',
-    PreTrainedModelResults : [
-    ],
-    CustomModelResults : [
+    initialGroundTruth : [
         {field_name: 'movie_name', extracted_data: '出猫特攻隊 8ad Genius'},
         {field_name: 'movie', extracted_data: '出猫特攻隊 8ad Genius'},
 
